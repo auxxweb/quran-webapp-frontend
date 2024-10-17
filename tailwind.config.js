@@ -14,11 +14,15 @@ module.exports = {
       fontFamily: {
         primary: ['Alexandria', 'sans-serif'], 
         sans: ['Inter', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+
+        noto: ['Noto Sans', 'sans-serif'],
       },
       screens: {
-        'min-1024': { 'max': '1030px' },
+        'max-1024': { 'max': '1030px' },
         'max-768': { 'max': '769px' },
         'max-430': { 'max': '430px' },
+        'max-375': { 'max': '376px' },
       },
     },
   },
