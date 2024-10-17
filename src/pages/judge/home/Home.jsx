@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./home.module.css";
-import NavBar from "../../../components/navBar/NavBar";
 import Users from "../../../components/home/users/Users";
+import Loading from "../../../components/loading/Loading";
 
 const Home = () => {
   const [userData, setUserData] = useState({
@@ -9,7 +9,6 @@ const Home = () => {
     place: "Calicut Zone",
   });
   return (
-    
       <div className={styles.section}>
         <div className={styles.container}>
           <div className={styles.header}>

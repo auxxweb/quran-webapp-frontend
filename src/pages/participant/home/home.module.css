@@ -1,0 +1,4 @@
+.section {
+  background-image: url("/public/images/bg-2.png");
+  @apply bg-cover bg-center h-screen;
+}
