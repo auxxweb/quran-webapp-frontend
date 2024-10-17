@@ -19,9 +19,19 @@ const NavBar = () => {
             alt="User Profile"
           />
           <div>
-            <h1 className={styles.text}>David Cooper</h1>
-            <h1 className={styles.text}>Calicut</h1>
+            <h1 className={styles.nameText}>
+              David Cooper <br />
+              <span className={styles.locationText}>
+                <img className={styles.locationIcon} src="/images/location.png" alt="User Profile" />
+                Calicut
+              </span>
+            </h1>
           </div>
+          <img
+            className={styles.logoutImage}
+            src="/images/logout.png"
+            alt="User Profile"
+          />
         </div>
       </div>
     </nav>
