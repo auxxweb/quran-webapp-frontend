@@ -1,12 +1,33 @@
-import React from 'react'
-import NavBar from '../../../components/navBar/NavBar'
+import React, { useState } from "react";
+import styles from "./home.module.css";
+import NavBar from "../../../components/navBar/NavBar";
+import Users from "../../../components/home/users/Users";
 
 const Home = () => {
+  const [userData, setUserData] = useState({
+    name: "David Cooper",
+    place: "Calicut Zone",
+  });
   return (
-    <div>
-      <NavBar/>
+    <div className={styles.section}>
+      <NavBar />
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h2 className={styles.WelcomeText}>Welcome</h2>
+          <h2 className={styles.WelcomeText}>
+            <img
+              className={styles.locationImage}
+              src="/images/homeLocation.png"
+              alt="location-img"
+            />
+            {userData.place}
+          </h2>
+        </div>
+        <h1 className={styles.nameText}>{userData.name}</h1>
+        <Users/>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
