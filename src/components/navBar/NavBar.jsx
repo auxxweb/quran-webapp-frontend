@@ -18,7 +18,7 @@ const NavBar = () => {
         <div className={styles.logoContainer}>
           <img
             className={styles.logoImage}
-            onClick={()=>navigate("/")}
+            onClick={()=>navigate("/judge")}
             src="/images/logo_-name.png"
             alt="Company-logo"
           />
