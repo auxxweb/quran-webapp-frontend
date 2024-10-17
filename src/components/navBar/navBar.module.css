@@ -1,10 +1,10 @@
 
 .navBarContainer {
-    @apply bg-gray-800 mx-auto px-4 rounded-b-[21px];
+    @apply bg-primary mx-auto pl-2 rounded-b-[30px] shadow-lg;
 }
 
 .navBarContent {
-    @apply flex h-20 justify-between;
+    @apply flex  justify-between;
 }
 
 .logoContainer {
@@ -12,13 +12,23 @@
 }
 
 .logoImage {
-    @apply h-8 w-auto;
+    @apply h-20 p-1 pl-0 w-auto;
 }
 
 .userProfileContainer {
-    @apply flex items-center pr-0;
+    @apply flex justify-between items-center gap-3  pr-3;
 }
 
 .userProfileImage {
-    @apply h-8 w-8 rounded-full;
+    @apply h-14 w-14 rounded-full;
+}
+.text{
+        font-size: 14px;
+        font-weight: 550;
+        line-height: 24px;
+        letter-spacing: 0.38px; 
+        @apply
+        font-primary
+        font-bold
+    
 }
