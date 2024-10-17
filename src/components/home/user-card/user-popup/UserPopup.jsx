@@ -22,13 +22,13 @@ const UserPopup = ({ setIsOpen, user }) => {
             <div className={styles.nameText}>{user.userName}</div>
             <div className="flex justify-center">
               <div className="flex w-[50vh] flex-col gap-3">
-                <InfoRow title="Phone" colour ={true} data="+977 9955221114" />
-                <InfoRow title="Email" colour ={true}  data="john@example.com" />
-                <InfoRow title="Age" data="10" />
-                <InfoRow title="Gender" data="Male" />
+                <InfoRow title="Phone" colour ={true} data={user.phone} />
+                <InfoRow title="Email" colour ={true}  data={user.email} />
+                <InfoRow title="Age" data={user.age} />
+                <InfoRow title="Gender" data={user.gender} />
                 <InfoRow
                   title="Address"
-                  data="1861 Bayonne Ave, Manchester Township, NJ, 08759"
+                  data={user.address}
                 />
               </div>
             </div>
