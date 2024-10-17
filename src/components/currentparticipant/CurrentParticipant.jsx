@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./CurrentParticipant.module.css";
-import GradientButton from "../gradientbutton/GradientButton";
+import GradientButton from "../buttons/gradientbutton/GradientButton";
 
 const CurrentParticipant = () => {
   const [userData, setUserData] = useState({

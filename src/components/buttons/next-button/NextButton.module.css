@@ -1,0 +1,7 @@
+/* .next_button_div{
+    @apply flex justify-end;
+} */
+
+.next_button{
+    @apply py-3 md:py-5 px-10 md:px-16 text-white font-medium bg-[#0B9D64] my-5 rounded-lg text-sm lg:text-[37px]
+}
