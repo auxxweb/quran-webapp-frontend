@@ -38,10 +38,10 @@
 }
 
 .arabic_text {
-  @apply text-secondary lg:text-[24px] font-normal;
+  @apply font-inter text-secondary lg:text-[24px]  text-2xl font-normal leading-none tracking-widest text-center;
 }
 .award_text {
-  @apply text-secondary lg:text-[18px] font-mono my-3;
+  @apply font-inter text-secondary py-3 text-base font-normal leading-6 tracking-wide text-center;
 }
 
 .line {
@@ -49,13 +49,13 @@
 }
 
 .card_welcome_title {
- @apply text-center bg-gradient-to-l from-gray-950  to-[#C09B5C]  inline-block text-transparent bg-clip-text text-[28px] md:text-[36px];
+  @apply text-center bg-gradient-to-l from-gray-950  to-[#C09B5C]  inline-block text-transparent bg-clip-text text-[28px] md:text-[36px]
+ font-[Amiri-Quran];
 }
 
 .checkbox {
   @apply flex gap-2;
 }
-
 
 .checkbox_input {
   -webkit-appearance: none;
@@ -69,8 +69,8 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.checkbox_label{
-  @apply font-bold -mt-1
+.checkbox_label {
+  @apply font-bold -mt-1;
 }
 
 .checkbox_input:checked {
@@ -85,9 +85,9 @@
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  background-image: url('/public/images/basic-tick.png');
+  background-image: url("/public/images/basic-tick.png");
   pointer-events: none;
-  background-size:10px;
+  background-size: 10px;
   background-repeat: no-repeat;
 }
 
@@ -125,7 +125,6 @@
   @apply flex justify-center;
 }
 
-
-.card_welcome_title_div{
-  @apply flex justify-center
+.card_welcome_title_div {
+  @apply flex justify-center;
 }
