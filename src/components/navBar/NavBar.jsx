@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import styles from "./navBar.module.css";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigate = useNavigate();
+
   const [userData, setUserData] = useState({
     name: "David Cooper",
     place: "Calicut",
@@ -15,6 +18,7 @@ const NavBar = () => {
         <div className={styles.logoContainer}>
           <img
             className={styles.logoImage}
+            onClick={()=>navigate("/judge")}
             src="/images/logo_-name.png"
             alt="Company-logo"
           />

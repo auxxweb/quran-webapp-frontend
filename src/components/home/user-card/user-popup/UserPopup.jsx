@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "./userPopup.module.css";
+import { useNavigate } from "react-router-dom";
 
 const UserPopup = ({ setIsOpen, user }) => {
+  const navigate = useNavigate();
   return (
     <div className={styles.wrapper}>
       <div className={styles.overlay}></div>
@@ -33,7 +35,7 @@ const UserPopup = ({ setIsOpen, user }) => {
               </div>
             </div>
               <div className="flex w-full justify-center mb-5 mt-7">
-                <button className={styles.button}>
+                <button onClick={()=>navigate("/judge/current-participant/id")} className={styles.button}>
                   Select
                 </button>
               </div>
