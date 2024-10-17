@@ -1,59 +1,27 @@
-import React from "react";
-import styles from "./CurrentParticipant.modules.css";
+import React, { useState } from "react";
+import styles from "./CurrentParticipant.module.css";
+import GradientButton from "../gradientbutton/GradientButton";
 
 const CurrentParticipant = () => {
+  const [userData, setUserData] = useState({
+    name: "David Cooper",
+    place: "Calicut",
+    profileImage:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  });
   return (
     <div className={styles.card}>
       <div className={styles.card_header}>
         <div className={styles.card_welcome_title_div}>
-          <h1 className={styles.card_welcome_title}>Welcome Back</h1>
+          <h1 className={styles.card_title}>Current participant</h1>
         </div>
 
-        <h1 className={styles.card_title}>Login</h1>
-        <p className={styles.card_descrption}>Glad you’re back.!</p>
-        <form className={styles.form} action="#">
-          <div>
-            <input
-              type="text"
-              name="Username"
-              id="Username"
-              className={styles.input}
-              placeholder="Username"
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-              className={styles.input}
-              required
-            />
-          </div>
-          <div className="flex items-center justify-between">
-            <div className={styles.checkbox}>
-              <div className="flex items-center h-5">
-                <input
-                  id="remember"
-                  aria-describedby="remember"
-                  type="checkbox"
-                  className={styles.checkbox_input}
-                  required
-                />
-              </div>
-              <div className={styles.checkbox_label}>
-                <label htmlFor="remember">Remember me</label>
-              </div>
-            </div>
-          </div>
-          <div className={styles.submit_button_div}>
-            <button type="button" className={styles.submit_button}>
-              Login
-            </button>
-          </div>
-        </form>
+        <div className={styles.image_div}>
+          <img src={userData.profileImage} className={styles.user_image} alt="" />
+        </div>
+
+        <h1 className={styles.card_name}>{userData.name}</h1>
+        <GradientButton titile="Proceed to Question" />
       </div>
     </div>
   );
