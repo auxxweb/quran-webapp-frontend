@@ -1,70 +1,131 @@
 .section {
-    @apply bg-gray-50 dark:bg-gray-900;
+  background-image: url("/public/images/backgroundimage.png");
+  @apply bg-cover bg-center h-full;
+  /* background-image: url('/images/bg.png');  */
 }
 
 .container {
-    @apply flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0;
+  @apply flex flex-col items-center sm:justify-center px-6 py-8 mx-auto md:h-screen lg:py-0;
 }
 
 .logo {
-    @apply flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white;
+  @apply flex items-center  text-2xl font-semibold text-gray-900;
 }
 
 .logo img {
-    @apply w-8 h-8 mr-2;
+  @apply lg:w-[150px] lg:h-[100px] mr-2;
 }
 
 .card {
-    @apply w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700;
+  box-shadow: -10px 10px 15px rgba(0, 0, 0, 0.5);
+  @apply bg-white rounded-3xl w-full lg:w-[40%]   mt-0 md:mt-10 sm:max-w-md xl:p-0 border-[2px] border-gray-500 border-opacity-65;
 }
 
 .card_header {
-    @apply p-6 space-y-4 md:space-y-6 sm:p-8;
+  @apply p-6 space-y-2 md:space-y-2  sm:p-8;
 }
 
-
-
-
 .card_title {
-    @apply text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white;
+  @apply text-xl  leading-tight tracking-tight text-gray-900 md:text-[36px] font-semibold;
 }
 
 .form {
-    @apply space-y-4 md:space-y-6;
+  @apply space-y-4 md:space-y-6;
 }
 
-
-
-.label {
-    @apply block mb-2 text-sm font-medium text-gray-900 dark:text-white;
-}
-/* 
 .input {
-    @apply bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+  @apply w-full bg-white border border-black placeholder:text-black rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-black text-black;
+}
+
+.arabic_text {
+  @apply text-primary lg:text-[24px] font-normal;
+}
+.award_text {
+  @apply text-primary lg:text-[18px] font-mono my-3;
+}
+
+.line {
+  @apply w-[35%];
+}
+
+.card_welcome_title {
+ @apply text-center bg-gradient-to-l from-gray-950  to-[#C09B5C]  inline-block text-transparent bg-clip-text text-[28px] md:text-[36px];
 }
 
 .checkbox {
-    @apply flex items-start;
+  @apply flex gap-2;
 }
+
 
 .checkbox_input {
-    @apply w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800;
+  -webkit-appearance: none;
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background: #f8f7f7;
+  border: 2px solid #000;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.checkbox_label {
-    @apply ml-3 text-sm text-gray-500 dark:text-gray-300;
+.checkbox_label{
+  @apply font-bold -mt-1
+}
+
+.checkbox_input:checked {
+  background: linear-gradient(140deg, #c09b5c 0%, #c09b5c 40%, #000 98%);
+}
+
+.checkbox_input::before {
+  content: "";
+  position: absolute;
+  top: 65%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-image: url('/public/images/basic-tick.png');
+  pointer-events: none;
+  background-size:10px;
+  background-repeat: no-repeat;
+}
+
+.card_descrption {
+  @apply text-sm  leading-tight tracking-tight text-gray-900 md:text-[16px] font-medium;
 }
 
 .submit_button {
-    @apply w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800;
+  width: 90%;
+  background-image: linear-gradient(
+    to right,
+    #c09b5c 0%,
+    #000000 51%,
+    #c09b5c 100%
+  );
+  margin: 10px;
+  padding: 10px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
 }
 
-.footer_text {
-    @apply text-sm font-light text-gray-500 dark:text-gray-400;
+.submit_button:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
 }
 
-.footer_link {
-    @apply font-medium text-primary-600 hover:underline dark:text-primary-500;
-} */
+.submit_button_div {
+  @apply flex justify-center;
+}
 
 
+.card_welcome_title_div{
+  @apply flex justify-center
+}
