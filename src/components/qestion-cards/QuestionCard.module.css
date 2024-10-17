@@ -1,0 +1,21 @@
+.card{
+    box-shadow: inset 4px 4px 8px rgb(212, 212, 212);
+    @apply w-full bg-white py-3 rounded-2xl flex justify-start px-5
+}
+
+.qusetionText{
+    @apply text-center 
+}
+
+.completedText{
+    @apply text-white
+}
+
+.completedCard{
+    @apply w-full bg-[#0B9D64] py-3 rounded-2xl flex justify-start px-5
+}
+
+.nextCard{
+    @apply w-full bg-secondary py-3 rounded-2xl flex justify-start px-5
+
+}

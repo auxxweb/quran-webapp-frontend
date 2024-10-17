@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Login.module.css";
-import GradientButton from "../../../components/gradientbutton/GradientButton";
+import GradientButton from "../../../components/buttons/gradientbutton/GradientButton";
 
 function Login() {
   return (

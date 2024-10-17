@@ -1,0 +1,55 @@
+.section {
+    background-image: url("/public/images/bg-2.png");
+    @apply bg-cover bg-center w-full ;
+  }
+  
+  .container {
+    @apply  mx-5 mt-5   md:mt-5;
+  }
+  
+  .header {
+    @apply flex justify-end;
+  }
+  
+  .WelcomeText {
+    @apply flex 
+    justify-end
+    font-[Amiri-Quran] 
+    text-[12px]
+    lg:text-2xl font-normal 
+    leading-[24px]
+     tracking-[0.38px] 
+      items-center gap-4;
+  }
+  
+  /* .nameText {
+    @apply mt-3
+     ml-10
+    font-[Amiri-Quran] 
+     text-[36px] 
+     font-normal 
+     leading-[24px];
+  } */
+  
+  .locationImage {
+    @apply h-5 md:h-10;
+  }
+  .currentparticipant{
+    @apply flex  justify-center items-center
+  }
+  
+
+  .nameText{
+     @apply text-[20px] md:text-[41px] font-bold text-[#0BA066] font-sans
+  }
+
+
+  .userDetailes{
+    @apply flex-col justify-end
+  }
+
+  .main_title{
+     @apply text-[20px] md:text-[36px] font-medium text-center text-secondary 
+  }
+
+  
