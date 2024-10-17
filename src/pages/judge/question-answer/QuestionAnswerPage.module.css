@@ -1,14 +1,14 @@
 .section {
   background-image: url("/public/images/bg-2.png");
-  @apply bg-cover bg-center w-full ;
+  @apply bg-cover bg-center w-full;
 }
 
 .container {
-  @apply  mx-5 mt-5   md:mt-5;
+  @apply mx-5 pt-5   md:pt-5;
 }
 
 .header {
-  @apply flex justify-end;
+  @apply flex justify-between;
 }
 
 .WelcomeText {
@@ -34,24 +34,40 @@
 .locationImage {
   @apply h-5 md:h-10;
 }
-.currentparticipant{
-  @apply flex  justify-center items-center
+.currentparticipant {
+  @apply flex  justify-center items-center;
 }
 
-
-.nameText{
-   @apply text-[20px] md:text-[41px] font-bold text-[#0BA066] font-sans
+.nameText {
+  @apply text-[20px] md:text-[41px] font-bold text-[#0BA066] font-sans;
 }
 
-
-.userDetailes{
-  @apply flex-col justify-end
+.userDetailes {
+  @apply flex-col justify-end;
 }
 
-.main_title{
-   @apply text-[20px] md:text-[36px] font-medium text-center text-secondary 
+.main_title {
+  @apply text-[20px] md:text-[36px] font-medium text-start text-secondary;
 }
 
-.profileImage{
-  @apply rounded-full w-[28px] h-[28px] md:w-[90px] md:h-[90px]
+.profileImage {
+  @apply rounded-full w-[28px] h-[28px] md:w-[90px] md:h-[90px]  hidden lg:block;
+}
+
+.question_main {
+  @apply w-[90%] space-y-5;
+}
+
+.main_section {
+  vertical-align: top;
+  line-height: 1.2;
+  font-size: 16px;
+  @apply w-full md:w-[90%]  rounded-3xl border-[1px] border-[#0B9D64] mx-0 md:mx-20 px-10 pt-5 pb-2  bg-slate-300  font-primary placeholder:text-start placeholder:text-[#0B9D64] placeholder:text-[20px] md:placeholder:text-[25px] placeholder:font-medium;
+}
+.titile {
+  @apply text-[20px] md:text-[25px] font-medium text-start text-secondary;
+}
+
+.descrption {
+  @apply text-center text-xl text-[25px]  leading-8 my-2;
 }

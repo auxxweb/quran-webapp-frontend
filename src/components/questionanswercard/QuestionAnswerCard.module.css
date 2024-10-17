@@ -1,0 +1,10 @@
+.main_section{
+    @apply w-[90%] rounded-3xl border-[1px] border-secondary  md:mx-20 px-10 pt-5 pb-2  bg-slate-300  font-primary
+}
+.titile{
+    @apply text-[20px] md:text-[25px] font-medium text-start text-secondary 
+}
+
+.descrption{
+    @apply text-center text-xl text-[25px]  leading-8 my-2
+}

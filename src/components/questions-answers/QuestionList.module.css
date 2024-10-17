@@ -1,0 +1,37 @@
+.card {
+    box-shadow: 10px 7px 15px rgba(194, 223, 250, 0.5);
+    @apply bg-[#eff1f4] md:block hidden rounded-3xl w-[100%] md:w-[40%] lg:w-[10%] xl:w-[9%] my-5 xl:p-0 ;
+  }
+  
+  .card_header {
+    @apply p-3 space-y-2 md:space-y-3  sm:p-8;
+  }
+  
+  .card_name {
+    @apply text-xl text-center  leading-tight tracking-tight text-gray-900 md:text-[36px] font-semibold;
+  }
+  
+  .card_title {
+    @apply text-xl text-center  leading-tight tracking-tight text-gray-900 md:text-[24px] font-semibold;
+  }
+  
+  .card_descrption {
+    @apply text-sm  leading-tight tracking-tight text-gray-900 md:text-[16px] font-medium;
+  }
+  
+  .card_welcome_title_div {
+    @apply flex justify-center;
+  }
+  
+  .image_div {
+    @apply flex justify-center;
+  }
+  
+  .user_image {
+    @apply rounded-full w-[180px] h-[180px];
+  }
+  
+  .main_title{
+    @apply text-center
+  }
+  
