@@ -19,27 +19,31 @@
 }
 
 .userProfileImage {
-  @apply h-12 w-12 rounded-full;
+  @apply h-12 w-12 max-430:h-10 max-430:w-10 rounded-full;
 }
 
 .logoutImage {
-  @apply h-7;
+    cursor: pointer;
+  @apply h-7 max-430:h-6 max-430:w-6;
 }
 .nameText {
   letter-spacing: 0.38px;
-  font-weight: 600;
-  @apply text-[15px]
+  @apply
+  text-[15px]
+  max-430:text-[12px]
   font-primary
+  font-bold
   text-black
   leading-[18px];
 }
 
 .locationText {
   letter-spacing: 0.38px;
-  font-weight: 600;
   @apply flex
     gap-1
     text-[15px]
+    max-430:text-[12px]
+    font-bold
     font-primary
     text-black
     leading-[18px];

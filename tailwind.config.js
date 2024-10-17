@@ -14,7 +14,11 @@ module.exports = {
       fontFamily: {
         primary: ['Alexandria', 'sans-serif'], 
       },
-
+      screens: {
+        'min-1024': { 'max': '1030px' },
+        'max-768': { 'max': '769px' },
+        'max-430': { 'max': '430px' },
+      },
     },
   },
   plugins: [],
