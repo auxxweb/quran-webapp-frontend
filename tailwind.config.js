@@ -6,11 +6,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#F33102",
+        primary: "#E9EAF0",
         secondary: "#FFFFFF",
         darkPrimary: "#F33102",
         darkSecondary: "#111111",
       },
+      fontFamily: {
+        primary: ['Alexandria', 'sans-serif'], 
+      },
+
     },
   },
   plugins: [],
