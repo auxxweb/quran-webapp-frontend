@@ -3,6 +3,9 @@ import styles from "./Login.module.css";
 import GradientButton from "../../../components/buttons/gradientbutton/GradientButton";
 
 function Login() {
+  const onClick=()=>{
+    
+  }
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -61,7 +64,7 @@ function Login() {
                   </div>
                 </div>
               </div>
-              <GradientButton titile="Login" />
+              <GradientButton onClick={onClick} titile="Login" />
             </form>
           </div>
         </div>
