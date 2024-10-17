@@ -13,7 +13,6 @@ const QuestionsListPage = () => {
   const data = ["qId1", "qId2", "qId3", "qId4", "qId5", "qId6", "qId7"];
   return (
     <div className={styles.section}>
-      <NavBar />
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={styles.userDetailes}>
