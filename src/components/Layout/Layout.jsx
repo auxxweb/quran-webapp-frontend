@@ -3,8 +3,10 @@ import NavBar from "../navBar/NavBar";
 
 const Layout = ({ children }) => {
   return (
-    <div className="">
-      <NavBar />
+    <div>
+      <div className="top-0 sticky">
+        <NavBar />
+      </div>
       {children}
     </div>
   );
