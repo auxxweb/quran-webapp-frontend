@@ -4,7 +4,7 @@
 }
 
 .container {
-  @apply max-430:px-5 max-768:px-10 px-28 pt-10 mb-5;
+  @apply max-430:px-5 max-768:px-10  max-900:px-10 px-28 pt-10 mb-5;
 }
 
 .header {
