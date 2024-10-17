@@ -1,0 +1,24 @@
+
+.navBarContainer {
+    @apply bg-gray-800 mx-auto px-4 rounded-b-[21px];
+}
+
+.navBarContent {
+    @apply flex h-20 justify-between;
+}
+
+.logoContainer {
+    @apply flex flex-1 sm:justify-start items-center;
+}
+
+.logoImage {
+    @apply h-8 w-auto;
+}
+
+.userProfileContainer {
+    @apply flex items-center pr-0;
+}
+
+.userProfileImage {
+    @apply h-8 w-8 rounded-full;
+}
