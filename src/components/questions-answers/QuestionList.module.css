@@ -1,6 +1,6 @@
 .card {
     box-shadow: 10px 7px 15px rgba(194, 223, 250, 0.5);
-    @apply bg-[#eff1f4] rounded-3xl w-[100%] md:w-[40%] lg:w-[10%] xl:w-[9%] my-5 xl:p-0 ;
+    @apply bg-[#eff1f4] md:block hidden rounded-3xl w-[100%] md:w-[40%] lg:w-[10%] xl:w-[9%] my-5 xl:p-0 ;
   }
   
   .card_header {

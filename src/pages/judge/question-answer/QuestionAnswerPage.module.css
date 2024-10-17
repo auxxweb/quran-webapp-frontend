@@ -62,7 +62,7 @@
   vertical-align: top;
   line-height: 1.2;
   font-size: 16px;
-  @apply w-[90%]  rounded-3xl border-[1px] border-[#0B9D64]  mx-20 px-10 pt-5 pb-2  bg-slate-300  font-primary placeholder:text-start placeholder:text-[#0B9D64] placeholder:text-[20px] md:placeholder:text-[25px] placeholder:font-medium;
+  @apply w-full md:w-[90%]  rounded-3xl border-[1px] border-[#0B9D64] mx-0 md:mx-20 px-10 pt-5 pb-2  bg-slate-300  font-primary placeholder:text-start placeholder:text-[#0B9D64] placeholder:text-[20px] md:placeholder:text-[25px] placeholder:font-medium;
 }
 .titile {
   @apply text-[20px] md:text-[25px] font-medium text-start text-secondary;
