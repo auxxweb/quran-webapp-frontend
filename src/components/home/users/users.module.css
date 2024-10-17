@@ -1,0 +1,16 @@
+.mainContainer {
+  @apply bg-primary 
+    w-full
+    h-96
+    mt-7
+    shadow-2xl
+    rounded-[25px];
+}
+
+.headText{
+    @apply 
+   font-[Amiri-Quran] 
+    text-[32px] 
+    font-normal 
+    leading-[24px];
+}
