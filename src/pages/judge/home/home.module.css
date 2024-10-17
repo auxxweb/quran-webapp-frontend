@@ -4,7 +4,7 @@
 }
 
 .container {
-  @apply mx-28 mt-10;
+  @apply max-430:px-5 max-768:px-10 px-28 pt-10 mb-5;
 }
 
 .header {
@@ -12,23 +12,30 @@
 }
 
 .WelcomeText {
-  @apply flex 
+  @apply 
+  max-430:text-[20px]
+  max-430:gap-1
+  flex 
   font-[Amiri-Quran] 
   text-2xl font-normal 
   leading-[24px]
    tracking-[0.38px] 
-   text-left items-center gap-4;
+   text-left
+    items-center 
+    gap-4;
 }
 
 .nameText {
   @apply mt-3
    ml-10
+   max-430:ml-0
   font-[Amiri-Quran] 
    text-[36px] 
+   max-430:text-center
    font-normal 
    leading-[24px];
 }
 
 .locationImage {
-  @apply h-10;
+  @apply h-10 max-430:h-6;
 }

@@ -1,16 +1,33 @@
 .mainContainer {
   @apply bg-primary 
     w-full
-    h-96
+    h-full
     mt-7
     shadow-2xl
-    rounded-[25px];
+    rounded-[25px]
+    p-7 px-20 max-430:px-5 max-768:px-7;
 }
-
-.headText{
-    @apply 
-   font-[Amiri-Quran] 
+.headContainer {
+  @apply max-430:block flex justify-between  w-full items-center;
+}
+.headText {
+  @apply font-[Amiri-Quran] 
+  max-430:text-[27px] 
+  max-430:text-center
+  max-768:text-[28px] 
     text-[32px] 
     font-normal 
     leading-[24px];
+}
+
+.userContainer {
+  @apply mt-10 
+  grid 
+  max-1024:grid-cols-3  
+  max-768:grid-cols-3 
+  max-430:grid-cols-1  
+  md:grid-cols-4    
+  gap-x-10
+  gap-y-8 
+  max-430:gap-y-5;
 }
