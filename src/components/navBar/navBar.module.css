@@ -11,7 +11,7 @@
 }
 
 .logoImage {
-  @apply h-24 p-1 pl-0 w-auto;
+  @apply h-24 p-1 pl-0 w-auto cursor-pointer;
 }
 
 .userProfileContainer {

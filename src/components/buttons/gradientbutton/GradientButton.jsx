@@ -1,9 +1,9 @@
 import React from "react";
 import styles from './gradientbutton.module.css'
 
-const GradientButton = ({titile}) => {
+const GradientButton = ({titile,onClick}) => {
   return (
-    <div className={styles.submit_button_div}>
+    <div onClick={onClick} className={styles.submit_button_div}>
       <button type="button" className={styles.submit_button}>
         {titile}
       </button>

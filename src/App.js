@@ -14,8 +14,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login"  element={<LoginPage />} />
         <Route path="/questions-list" element={<QuestionsListPage />} />
-        <Route path="/current-participant" element={<CurrentParticipantPage />} />
-        <Route path="/question-answer" element={<QuestionAnswerPage />} />
+        <Route path="/current-participant/:id" element={<CurrentParticipantPage />} />
+        <Route path="/question-answer/:id" element={<QuestionAnswerPage />} />
       </Routes>
     </Router>
   );
