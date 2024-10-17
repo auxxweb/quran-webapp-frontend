@@ -5,15 +5,16 @@
     mt-7
     shadow-2xl
     rounded-[25px]
-    p-7 px-20 max-430:px-5 max-768:px-7;
+    p-7 px-20 max-430:px-5 max-768:px-7 max-900:px-7;
 }
 .headContainer {
-  @apply max-430:block flex justify-between  w-full items-center;
+  @apply max-430:block max-650:block  flex justify-between  w-full items-center;
 }
 .headText {
   @apply font-[Amiri-Quran] 
   max-430:text-[27px] 
   max-430:text-center
+  max-650:text-center
   max-768:text-[28px] 
     text-[32px] 
     font-normal 
@@ -25,6 +26,7 @@
   grid 
   max-1024:grid-cols-3  
   max-768:grid-cols-3 
+  max-650:grid-cols-2 
   max-430:grid-cols-1  
   md:grid-cols-4    
   gap-x-10

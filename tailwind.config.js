@@ -20,7 +20,9 @@ module.exports = {
       },
       screens: {
         'max-1024': { 'max': '1030px' },
+        'max-900': { 'max': '900px' },
         'max-768': { 'max': '769px' },
+        'max-650': { 'max': '650px' },
         'max-430': { 'max': '430px' },
         'max-375': { 'max': '376px' },
       },

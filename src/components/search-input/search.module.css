@@ -1,9 +1,9 @@
 .mainDiv {
-  @apply flex gap-3  max-430:gap-1 max-768:gap-1  max-430:mt-5  ;
+  @apply flex gap-3  max-430:gap-1 max-768:gap-1  max-430:mt-5 max-650:mt-5 ;
 }
 
 .searchInput {
-  @apply outline-none px-5 py-2 w-72 max-430:w-[70%] border-secondary border-2 rounded-md;
+  @apply outline-none px-5 py-2 w-72 max-430:w-[70%] max-650:w-full border-secondary border-2 rounded-md;
 }
 
 .button {
