@@ -1,11 +1,11 @@
 .mainDiv {
-  @apply flex gap-3;
+  @apply flex gap-3  max-430:gap-1 max-768:gap-1  max-430:mt-5  ;
 }
 
 .searchInput {
-  @apply outline-none px-5 py-2 w-72 border-secondary border-2 rounded-md;
+  @apply outline-none px-5 py-2 w-72 max-430:w-[70%] border-secondary border-2 rounded-md;
 }
 
 .button {
-  @apply bg-secondary rounded-lg font-inter  text-white px-8 py-4 hover:opacity-75 uppercase;
+  @apply bg-secondary rounded-lg font-inter  text-white max-768:px-3   max-430:px-3  px-8 py-4 hover:opacity-75 uppercase;
 }

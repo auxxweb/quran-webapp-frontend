@@ -22,8 +22,8 @@ const UserPopup = ({ setIsOpen, user }) => {
             <div className={styles.nameText}>{user.userName}</div>
             <div className="flex justify-center">
               <div className="flex w-[50vh] flex-col gap-3">
-                <InfoRow title="Phone" data="+977 9955221114" />
-                <InfoRow title="Email" data="john@example.com" />
+                <InfoRow title="Phone" colour ={true} data="+977 9955221114" />
+                <InfoRow title="Email" colour ={true}  data="john@example.com" />
                 <InfoRow title="Age" data="10" />
                 <InfoRow title="Gender" data="Male" />
                 <InfoRow
@@ -44,13 +44,13 @@ const UserPopup = ({ setIsOpen, user }) => {
   );
 };
 
-const InfoRow = ({ title, data }) => {
+const InfoRow = ({ title, data ,colour}) => {
   return (
     <div className="grid grid-cols-2  ">
       <div className="font-inter text-sm text-[#373B3E] font-semibold leading-[22.5px] text-left">
         {title}
       </div>
-      <div className="font-inter text-sm text-[#1DB290] font-medium leading-[22.5px] ">
+      <div className={`${colour?'text-[#1DB290] ':'text-[#7A7C7F]'} font-inter text-sm  font-medium leading-[22.5px] `}>
         {data}
       </div>
     </div>

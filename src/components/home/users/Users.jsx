@@ -46,7 +46,7 @@ const Users = () => {
         <h1 className={styles.headText}>Participants</h1>
         <SearchInput onSearchInputChange={handleSearchInputChange} />
       </div>
-      <div className="mt-10 grid grid-cols-4 gap-x-10 gap-y-8">
+      <div className={styles.userContainer}>
         {userDatas.map((user) => (
           <UserCard user={user}/>
         ))}

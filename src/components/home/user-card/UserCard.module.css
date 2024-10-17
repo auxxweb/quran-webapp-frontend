@@ -25,7 +25,7 @@
 }
 
 .profileImage {
-  @apply h-20 w-20 max-430:h-10 max-430:w-10 rounded-full;
+  @apply h-20 w-20  rounded-full;
 }
 
 .userNameText {
