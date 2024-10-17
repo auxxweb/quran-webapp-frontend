@@ -10,7 +10,6 @@ const CurrentParticipantPage = () => {
   });
   return (
     <div className={styles.section}>
-      <NavBar />
       <div className={styles.container}>
         <div className={styles.header}>
           <button>

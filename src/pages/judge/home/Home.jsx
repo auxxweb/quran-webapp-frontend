@@ -9,8 +9,7 @@ const Home = () => {
     place: "Calicut Zone",
   });
   return (
-    <>
-      <NavBar />
+    
       <div className={styles.section}>
         <div className={styles.container}>
           <div className={styles.header}>
@@ -28,7 +27,6 @@ const Home = () => {
           <Users />
         </div>
       </div>
-    </>
   );
 };
 
