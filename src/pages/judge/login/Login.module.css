@@ -38,10 +38,10 @@
 }
 
 .arabic_text {
-  @apply text-primary lg:text-[24px] font-normal;
+  @apply text-secondary lg:text-[24px] font-normal;
 }
 .award_text {
-  @apply text-primary lg:text-[18px] font-mono my-3;
+  @apply text-secondary lg:text-[18px] font-mono my-3;
 }
 
 .line {
