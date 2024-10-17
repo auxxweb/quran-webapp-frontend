@@ -1,15 +1,17 @@
 .mainContainer {
   @apply bg-primary 
     w-full
-    h-96
+    h-full
     mt-7
     shadow-2xl
-    rounded-[25px];
+    rounded-[25px]
+    p-7 px-20;
 }
-
-.headText{
-    @apply 
-   font-[Amiri-Quran] 
+.headContainer {
+  @apply  flex justify-between  items-center;
+}
+.headText {
+  @apply font-[Amiri-Quran] 
     text-[32px] 
     font-normal 
     leading-[24px];

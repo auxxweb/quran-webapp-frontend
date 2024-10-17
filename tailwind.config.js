@@ -14,6 +14,9 @@ module.exports = {
       fontFamily: {
         primary: ['Alexandria', 'sans-serif'], 
         sans: ['Inter', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+
+        noto: ['Noto Sans', 'sans-serif'],
       },
       screens: {
         'min-1024': { 'max': '1030px' },

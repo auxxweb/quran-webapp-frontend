@@ -1,0 +1,44 @@
+.wrapper {
+  @apply fixed inset-0 z-50 flex items-center justify-center;
+}
+
+.overlay {
+  @apply absolute inset-0 bg-black opacity-50;
+}
+
+.popup {
+  @apply absolute md:w-[75vh] border-primary rounded-3xl p-5 overflow-y-auto overflow-x-hidden bg-white z-50 justify-center items-center w-full;
+}
+
+.header {
+  @apply flex items-center w-full justify-center;
+}
+
+.photoContainer {
+  @apply w-full;
+}
+
+.photoWrapper {
+  @apply py-3;
+}
+
+.photo {
+  @apply w-32 h-32 rounded-full mx-auto;
+}
+
+.nameText {
+  @apply font-noto text-4xl font-semibold leading-[49.03px] text-center;
+}
+.closeButtonImage{
+    @apply h-6  cursor-pointer ;
+}
+
+.closeImageContainer{
+    @apply absolute right-4 top-4;
+}
+
+
+.button {
+    @apply bg-secondary rounded-lg font-inter  text-white px-8 py-4 hover:opacity-75 uppercase;
+  }
+  

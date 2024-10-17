@@ -4,7 +4,7 @@
 }
 
 .container {
-  @apply mx-28 mt-10;
+  @apply px-28 pt-10;
 }
 
 .header {

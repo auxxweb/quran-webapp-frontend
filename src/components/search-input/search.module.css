@@ -7,5 +7,5 @@
 }
 
 .button {
-  @apply bg-secondary rounded-lg font-sans text-white px-8 py-4 hover:opacity-75 uppercase;
+  @apply bg-secondary rounded-lg font-inter  text-white px-8 py-4 hover:opacity-75 uppercase;
 }
