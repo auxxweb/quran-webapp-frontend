@@ -18,7 +18,6 @@ function QuestionAnswerPage() {
 
   return (
     <div className={styles.section}>
-      <NavBar />
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.WelcomeText}>
