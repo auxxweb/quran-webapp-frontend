@@ -29,10 +29,10 @@
 .nameText {
   letter-spacing: 0.38px;
   @apply
-  text-[15px]
+  text-[14px]
   max-430:text-[12px]
   font-primary
-  font-bold
+  font-[550]
   text-black
   leading-[18px];
 }
@@ -43,7 +43,7 @@
     gap-1
     text-[15px]
     max-430:text-[12px]
-    font-bold
+    font-[550]
     font-primary
     text-black
     leading-[18px];
