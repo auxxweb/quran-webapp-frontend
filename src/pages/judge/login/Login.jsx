@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Login.module.css";
+import GradientButton from "../../../components/gradientbutton/GradientButton";
 
 function Login() {
   return (
@@ -10,7 +11,11 @@ function Login() {
         </a>
         <h1 className={styles.arabic_text}>جائزة أسلم للقرآن الكريم</h1>
         <h1 className={styles.award_text}>ASLAM HOLY QUR’AN AWARD</h1>
-        <img className={styles.line} src="/images/login-page-line.png" alt="line" />
+        <img
+          className={styles.line}
+          src="/images/login-page-line.png"
+          alt="line"
+        />
         <div className={styles.card}>
           <div className={styles.card_header}>
             <div className={styles.card_welcome_title_div}>
@@ -52,15 +57,11 @@ function Login() {
                     />
                   </div>
                   <div className={styles.checkbox_label}>
-                    <label htmlFor="remember" >Remember me</label>
+                    <label htmlFor="remember">Remember me</label>
                   </div>
                 </div>
               </div>
-              <div className={styles.submit_button_div}>
-                <button type="button" className={styles.submit_button}>
-                  Login
-                </button>
-              </div>
+              <GradientButton titile="Login" />
             </form>
           </div>
         </div>

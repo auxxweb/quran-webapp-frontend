@@ -1,0 +1,30 @@
+
+.submit_button {
+    width: 90%;
+    background-image: linear-gradient(
+      to right,
+      #c09b5c 0%,
+      #000000 51%,
+      #c09b5c 100%
+    );
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+  }
+  
+  .submit_button:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .submit_button_div {
+    @apply flex justify-center;
+  }
