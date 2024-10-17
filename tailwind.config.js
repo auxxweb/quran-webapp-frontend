@@ -6,10 +6,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#F33102",
+        primary: "#E9EAF0",
         secondary: "#FFFFFF",
         darkPrimary: "#F33102",
         darkSecondary: "#111111",
+      },
+      fontFamily: {
+        primary: ['Alexandria', 'sans-serif'], 
+      },
+      screens: {
+        'min-1024': { 'max': '1030px' },
+        'max-768': { 'max': '769px' },
+        'max-430': { 'max': '430px' },
       },
     },
   },
