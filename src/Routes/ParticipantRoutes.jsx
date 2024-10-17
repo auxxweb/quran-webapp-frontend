@@ -1,11 +1,12 @@
 import React from 'react'
-import {  Route } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
+import Home from '../pages/participant/home/Home';
 
 const ParticipantRoutes = () => {
   return (
-    <div>
-      
-    </div>
+    <Routes>
+        <Route path="/question" element={<Home />} />
+    </Routes>
   )
 }
 

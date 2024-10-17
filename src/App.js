@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import JudgeRoutes from "./Routes/JudgeRoutes";
 import ParticipantRoutes from "./Routes/ParticipantRoutes";
+import JudgeRoutes from "./Routes/JudgeRoutes";
 
 function App() {
   
