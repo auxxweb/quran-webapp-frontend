@@ -1,13 +1,15 @@
-
 import "./App.css";
-import LoginPage from "./pages/judge/Login";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/judge/login/Login";
 
 function App() {
-  const judgeRoutes = [
-    // { path: "/judge/home", element: <AdminHomePage /> },
-  ];
+  
   return (
- <LoginPage/>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </Router>
   );
 }
 
