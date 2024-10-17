@@ -15,7 +15,7 @@ const NavBar = () => {
         <div className={styles.logoContainer}>
           <img
             className={styles.logoImage}
-            src="/images/logo.png"
+            src="/images/logo_-name.png"
             alt="Company-logo"
           />
         </div>

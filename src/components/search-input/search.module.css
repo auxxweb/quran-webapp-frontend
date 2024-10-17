@@ -1,0 +1,11 @@
+.mainDiv {
+  @apply flex gap-3;
+}
+
+.searchInput {
+  @apply outline-none px-5 py-2 w-72 border-secondary border-2 rounded-md;
+}
+
+.button {
+  @apply bg-secondary rounded-lg font-sans text-white px-8 py-4 hover:opacity-75 uppercase;
+}

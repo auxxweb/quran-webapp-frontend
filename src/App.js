@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/judge/login/Login";
 import Home from "./pages/judge/home/Home";
 import QuestionsList from "./pages/judge/questions-list/QuestionsList";
-import CurrentParticipant from "./pages/judge/currentparticipant/currentparticipant";
+import CurrentParticipant from "./pages/judge/currentparticipant/CurrentParticipant.jsx";
 
 function App() {
   
