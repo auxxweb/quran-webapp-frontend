@@ -1,75 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./users.module.css";
 import SearchInput from "../../search-input/SearchInput";
 import UserCard from "../user-card/UserCard";
+import { get } from "../../../api/api";
 
 const Users = () => {
+  const [userData, setUserData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const handleSearchInputChange = (value) => {
-    console.log("Search term:", value);
+    fetchUser(value)
   };
 
-  const userDatas = [
-    {
-      userName: "Muhammed Ali",
-      phone: "+977 9955221114",
-      email: "john@example.com",
-      age: "10",
-      gender: "Male",
-      address: "1861 Bayonne Ave, Manchester Township, NJ, 08759",
-      image:
-        "https://s3-alpha-sig.figma.com/img/874c/328d/ce99003b34452c91bf7d3d5d855e9980?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BzLMsw8nTvraVNifYzDT4eyHHq-W3-AtVvuukikYjC5zQcG~UHthXApkaUBUDXHGWDLELR7Nx35QUWSsPaKlhNeXm7p6VR4HY2GMvhlYmJ6Y0MnWcXfmJamgaYx9qqBwfVG6xPnnZgorTgjGnIY1qT7p70mxltFo7A3TqV3tLT917BTBK9Cj93013tgdfm5WK7qQbKJmQ2DHJcKmwOojCQk8iG7zqnkfaYlkU6PrU5Ot0c60-338v5A~f7yFZWG~zb6LI3KJacgPA0LWKOlVMmW07QF5cbgQCMMwdgx5hiA4YHJwyUrX54ubHP7Kcgz5YgcFtsIdBF3adpGcj9lhdw__",
-    },
-    {
-      userName: "Muhammed Ali",
-      phone: "+977 9955221114",
-      email: "john@example.com",
-      gender: "Male",
-      address: "1861 Bayonne Ave, Manchester Township, NJ, 08759",
-      age: "10",
-      image:
-        "https://s3-alpha-sig.figma.com/img/874c/328d/ce99003b34452c91bf7d3d5d855e9980?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BzLMsw8nTvraVNifYzDT4eyHHq-W3-AtVvuukikYjC5zQcG~UHthXApkaUBUDXHGWDLELR7Nx35QUWSsPaKlhNeXm7p6VR4HY2GMvhlYmJ6Y0MnWcXfmJamgaYx9qqBwfVG6xPnnZgorTgjGnIY1qT7p70mxltFo7A3TqV3tLT917BTBK9Cj93013tgdfm5WK7qQbKJmQ2DHJcKmwOojCQk8iG7zqnkfaYlkU6PrU5Ot0c60-338v5A~f7yFZWG~zb6LI3KJacgPA0LWKOlVMmW07QF5cbgQCMMwdgx5hiA4YHJwyUrX54ubHP7Kcgz5YgcFtsIdBF3adpGcj9lhdw__",
-    },
-    {
-      userName: "Muhammed Ali",
-      phone: "+977 9955221114",
-      email: "john@example.com",
-      gender: "Male",
-      address: "1861 Bayonne Ave, Manchester Township, NJ, 08759",
-      age: "10",
-      image:
-        "https://s3-alpha-sig.figma.com/img/874c/328d/ce99003b34452c91bf7d3d5d855e9980?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BzLMsw8nTvraVNifYzDT4eyHHq-W3-AtVvuukikYjC5zQcG~UHthXApkaUBUDXHGWDLELR7Nx35QUWSsPaKlhNeXm7p6VR4HY2GMvhlYmJ6Y0MnWcXfmJamgaYx9qqBwfVG6xPnnZgorTgjGnIY1qT7p70mxltFo7A3TqV3tLT917BTBK9Cj93013tgdfm5WK7qQbKJmQ2DHJcKmwOojCQk8iG7zqnkfaYlkU6PrU5Ot0c60-338v5A~f7yFZWG~zb6LI3KJacgPA0LWKOlVMmW07QF5cbgQCMMwdgx5hiA4YHJwyUrX54ubHP7Kcgz5YgcFtsIdBF3adpGcj9lhdw__",
-    },
-    {
-      userName: "Muhammed Ali",
-      phone: "+977 9955221114",
-      email: "john@example.com",
-      gender: "Male",
-      address: "1861 Bayonne Ave, Manchester Township, NJ, 08759",
-      age: "10",
-      image:
-        "https://s3-alpha-sig.figma.com/img/874c/328d/ce99003b34452c91bf7d3d5d855e9980?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BzLMsw8nTvraVNifYzDT4eyHHq-W3-AtVvuukikYjC5zQcG~UHthXApkaUBUDXHGWDLELR7Nx35QUWSsPaKlhNeXm7p6VR4HY2GMvhlYmJ6Y0MnWcXfmJamgaYx9qqBwfVG6xPnnZgorTgjGnIY1qT7p70mxltFo7A3TqV3tLT917BTBK9Cj93013tgdfm5WK7qQbKJmQ2DHJcKmwOojCQk8iG7zqnkfaYlkU6PrU5Ot0c60-338v5A~f7yFZWG~zb6LI3KJacgPA0LWKOlVMmW07QF5cbgQCMMwdgx5hiA4YHJwyUrX54ubHP7Kcgz5YgcFtsIdBF3adpGcj9lhdw__",
-    },
-    {
-      userName: "Muhammed Ali",
-      phone: "+977 9955221114",
-      email: "john@example.com",
-      gender: "Male",
-      address: "1861 Bayonne Ave, Manchester Township, NJ, 08759",
-      age: "10",
-      image:
-        "https://www.gravatar.com/avatar/2acfb745ecf9d4dccb3364752d17f65f?s=260&d=mp",
-    },
-    {
-      userName: "Muhammed Ali",
-      phone: "+977 9955221114",
-      email: "john@example.com",
-      gender: "Male",
-      address: "1861 Bayonne Ave, Manchester Township, NJ, 08759",
-      age: "10",
-      image:
-        "https://s3-alpha-sig.figma.com/img/874c/328d/ce99003b34452c91bf7d3d5d855e9980?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BzLMsw8nTvraVNifYzDT4eyHHq-W3-AtVvuukikYjC5zQcG~UHthXApkaUBUDXHGWDLELR7Nx35QUWSsPaKlhNeXm7p6VR4HY2GMvhlYmJ6Y0MnWcXfmJamgaYx9qqBwfVG6xPnnZgorTgjGnIY1qT7p70mxltFo7A3TqV3tLT917BTBK9Cj93013tgdfm5WK7qQbKJmQ2DHJcKmwOojCQk8iG7zqnkfaYlkU6PrU5Ot0c60-338v5A~f7yFZWG~zb6LI3KJacgPA0LWKOlVMmW07QF5cbgQCMMwdgx5hiA4YHJwyUrX54ubHP7Kcgz5YgcFtsIdBF3adpGcj9lhdw__",
-    },
-  ];
+  useEffect(() => {
+    fetchUser("");
+  }, []);
+
+  const fetchUser = async (search) => {
+    const data = await get(`/judge/users?currentPage=${currentPage}&&search=${search}`);
+    setUserData(data.participants);
+  };
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.headContainer}>
@@ -77,7 +27,7 @@ const Users = () => {
         <SearchInput onSearchInputChange={handleSearchInputChange} />
       </div>
       <div className={styles.userContainer}>
-        {userDatas.map((user, index) => (
+        {userData.map((user, index) => (
           <UserCard user={user} key={index} />
         ))}
       </div>

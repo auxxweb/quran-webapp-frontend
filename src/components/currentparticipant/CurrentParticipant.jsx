@@ -1,19 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CurrentParticipant.module.css";
 import GradientButton from "../buttons/gradientbutton/GradientButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { get, post } from "../../api/api";
 
 const CurrentParticipant = () => {
   const navigate = useNavigate();
-  const [userData, setUserData] = useState({
-    name: "David Cooper",
-    place: "Calicut",
-    profileImage:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  });
-  const onClick=()=>{
-    navigate('/judge/question-answer/id')
-  }
+  const [userData, setUserData] = useState(null);
+  const { id } = useParams();
+  useEffect(() => {
+    (async () => {
+      const data = await get("/judge/users/" + id);
+      setUserData(data.participant);
+    })();
+  }, [id]);
+
+  const onClick = async () => {
+    const data = await post("/judge/users/proceed-to-question", {
+      participant_id: id,
+      startTime: new Date(),
+    });
+    if (data?.success) {
+      navigate("/judge/question-answer/" + id);
+    }
+  };
   return (
     <div className={styles.card}>
       <div className={styles.card_header}>
@@ -22,10 +32,14 @@ const CurrentParticipant = () => {
         </div>
 
         <div className={styles.image_div}>
-          <img src={userData.profileImage} className={styles.user_image} alt="" />
+          <img
+            src={userData?.profileImage ?? "/images/profileImage.jpg"}
+            className={styles.user_image}
+            alt=""
+          />
         </div>
 
-        <h1 className={styles.card_name}>{userData.name}</h1>
+        <h1 className={styles.card_name}>{userData?.name}</h1>
         <GradientButton onClick={onClick} titile="Proceed to Question" />
       </div>
     </div>

@@ -15,7 +15,7 @@ const SearchInput = ({ onSearchInputChange }) => {
 
       <button
         onClick={() => {
-          if (inputValue && inputValue != "") onSearchInputChange(inputValue);
+          onSearchInputChange(inputValue);
         }}
         className={styles.button}
       >
