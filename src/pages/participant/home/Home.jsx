@@ -1,27 +1,52 @@
-import React from "react";
-import styles from "./home.module.css";
-import ParticipantNavBar from "../../../components/participant/participant-navBar/ParticipantNavBar";
-import CircularTimer from "../../../components/timer/Timer";
-import UserQuestions from "../../../components/user-questions-show/UserQuestionsShow";
+import React, { useState } from "react";
+import styles from "./Home.module.css";
+import CurrentParticipant from "../../../components/currentparticipant/CurrentParticipant";
 
 const Home = () => {
+  const [userData, setUserData] = useState({
+    name: "David Cooper",
+    place: "Calicut Zone",
+    profileImage:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  });
   return (
     <div className={styles.section}>
-      <ParticipantNavBar>
-        <div className="h-full space-y-10">
-          <h1 className={styles.award_text}>ASLAM HOLY QUR’AN AWARD</h1>
-          <div className={styles.main_div}>
-            <CircularTimer />
-          </div>
-          <div className={styles.question_div}>
-            <UserQuestions
-              titile={"Question 1"}
-              border={"#C19D5C"}
-              descrption={"What are some other names for the Quran?"}
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h2 className={styles.WelcomeText}>
+            <img
+              className={styles.logo_image}
+              src="/images/logo.png"
+              alt="location-img"
             />
+            <img
+              className={styles.locationImage}
+              src="/images/homeLocation.png"
+              alt="location-img"
+            />
+            {userData.place}
+          </h2>
+        </div>
+        <div className={styles.currentparticipant}>
+          <div className={styles.card}>
+            <div className={styles.card_header}>
+              <div className={styles.card_welcome_title_div}>
+                <h1 className={styles.card_title}>Current participant</h1>
+              </div>
+
+              <div className={styles.image_div}>
+                <img
+                  src={userData.profileImage}
+                  className={styles.user_image}
+                  alt=""
+                />
+              </div>
+
+              <h1 className={styles.card_name}>{userData.name}</h1>
+            </div>
           </div>
         </div>
-      </ParticipantNavBar>
+      </div>
     </div>
   );
 };
