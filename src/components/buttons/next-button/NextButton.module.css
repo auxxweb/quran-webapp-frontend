@@ -3,5 +3,5 @@
 } */
 
 .next_button{
-    @apply py-3 md:py-5 px-10 md:px-16 text-white font-medium bg-[#0B9D64] my-5 rounded-lg text-sm lg:text-[37px]
+    @apply py-2 md:py-5 px-5 md:px-16 max-h-14  text-white font-medium bg-[#0B9D64] my-11 md:my-5 rounded-lg text-sm lg:text-[20px]
 }

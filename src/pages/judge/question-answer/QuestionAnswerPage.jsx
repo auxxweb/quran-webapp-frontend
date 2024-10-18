@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import styles from "./QuestionAnswerPage.module.css";
-import NextButton from "../../../components/buttons/next-button/NextButton";
-import NavBar from "../../../components/navBar/NavBar";
 import QuestionsList from "../../../components/questions-answers/QuestionList";
 import QuestionAnswerCard from "../../../components/questionanswercard/QuestionAnswerCard";
-import Timer5 from "../../../components/timer/Timer";
+import CircularTimer from "../../../components/timer/Timer";
+import NextButton from "../../../components/buttons/next-button/NextButton";
 
 function QuestionAnswerPage() {
   const [userData, setUserData] = useState({
@@ -28,6 +27,7 @@ function QuestionAnswerPage() {
             />
             {userData.place}
           </h2>
+          <CircularTimer />
           <div className={styles.userDetailes}>
             <h2 className={styles.WelcomeText}>
               <img
@@ -41,7 +41,6 @@ function QuestionAnswerPage() {
         </div>
         <div className="flex">
           <h1 className={styles.main_title}>Questions List</h1>
-          <Timer5 />
         </div>
 
         <div className={styles.currentparticipant}>
@@ -67,6 +66,12 @@ function QuestionAnswerPage() {
               placeholder="Participant’s Answer"
             />
           </div>
+        </div>
+        <div className={styles.score_btn_div}>
+           <div className={styles.score_div}>
+            <h1><span>Score</span> <span className={styles.score_text}>44</span></h1>
+           </div>
+          <NextButton text={'Submit'}/>
         </div>
       </div>
     </div>
