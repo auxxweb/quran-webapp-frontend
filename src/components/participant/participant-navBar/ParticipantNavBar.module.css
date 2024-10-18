@@ -1,0 +1,86 @@
+.section {
+    background-image: url("/public/images/bg-2.png");
+    @apply bg-cover bg-center w-full;
+  }
+  
+  .container {
+    @apply mx-5 pt-5   md:pt-5;
+  }
+  
+  .header {
+    @apply flex justify-between;
+  }
+  
+  .WelcomeText {
+    @apply flex 
+    justify-end
+    font-[Amiri-Quran] 
+    text-[12px]
+    lg:text-2xl font-normal 
+    leading-[24px]
+     tracking-[0.38px] 
+      items-center gap-4;
+  }
+  
+  /* .nameText {
+    @apply mt-3
+     ml-10
+    font-[Amiri-Quran] 
+     text-[36px] 
+     font-normal 
+     leading-[24px];
+  } */
+  
+  .locationImage {
+    @apply h-5 md:h-10;
+  }
+  .currentparticipant {
+    @apply flex-col flex  md:flex-row  justify-center items-center;
+  }
+  
+  .nameText {
+    @apply text-[20px] md:text-[41px] font-bold text-[#0BA066] font-sans;
+  }
+  
+  .userDetailes {
+    @apply flex-col justify-end;
+  }
+  
+  .main_title {
+    @apply text-[20px] md:text-[36px] font-medium text-start text-secondary;
+  }
+  
+  .profileImage {
+    @apply rounded-full w-[28px] h-[28px] md:w-[90px] md:h-[90px]  hidden lg:block;
+  }
+  
+  .question_main {
+    @apply w-[100%] space-y-5 flex-col items-center justify-center;
+  }
+  
+  .main_section {
+    vertical-align: top;
+    line-height: 1.2;
+    font-size: 16px;
+    box-shadow: 10px 10px 15px rgba(147, 160, 188, 0.7);
+    @apply w-full md:w-[90%] text-xl rounded-3xl border-[1px] border-[#0B9D64] mx-0 md:mx-20 px-10 pt-5 pb-2  bg-slate-300  font-primary placeholder:text-start placeholder:text-[#0B9D64] placeholder:text-[20px] md:placeholder:text-[25px] placeholder:font-medium;
+  }
+  .titile {
+    @apply text-[20px] md:text-[25px] font-medium text-start text-secondary;
+  }
+  
+  .descrption {
+    @apply text-center text-xl text-[25px]  leading-8 my-2;
+  }
+  
+  .score_div{
+    box-shadow: 10px 7px 15px rgba(194, 223, 250, 0.5);
+    @apply py-5 md:py-8 px-10 my-11 md:my-5 md:px-16 text-black  bg-primary  rounded-lg text-sm lg:text-[20px] font-semibold
+  }
+  .score_btn_div{
+    @apply flex justify-end gap-10 mx-5 lg:mx-16 items-center
+  }
+  .score_text{
+    @apply text-[#0B9D64] text-3xl mx-2
+    
+  }

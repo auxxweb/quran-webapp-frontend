@@ -1,4 +1,16 @@
 .section {
   background-image: url("/public/images/bg-2.png");
-  @apply bg-cover bg-center h-screen;
+  @apply bg-cover bg-center h-screen w-full;
+}
+
+.main_div {
+  @apply flex justify-self-center items-center;
+}
+
+.question_div {
+  @apply w-full flex justify-center items-center my-auto;
+}
+
+.award_text {
+  @apply font-semibold text-xl md:text-[24px] text-secondary py-3   leading-6 tracking-wide text-center;
 }
