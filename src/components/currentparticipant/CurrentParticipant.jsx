@@ -21,7 +21,8 @@ const CurrentParticipant = () => {
       startTime: new Date(),
     });
     if (data?.success) {
-      navigate("/judge/question-answer/" + id);
+      const resultId=data?._id??data.result._id
+      navigate("/judge/question-answer/" + resultId);
     }
   };
   return (
