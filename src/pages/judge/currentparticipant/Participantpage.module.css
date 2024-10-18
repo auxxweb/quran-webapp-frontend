@@ -1,6 +1,6 @@
 .section {
     background-image: url("/public/images/backgroundimage.png");
-    @apply bg-cover bg-center h-screen;
+    @apply bg-cover bg-center ;
   }
   
   .container {
