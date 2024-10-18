@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./NextButton.module.css";
 
-const NextButton = () => {
+const NextButton = ({text}) => {
   return (
     <button type="button" className={styles.next_button}>
-      Next
+     {text}
     </button>
   );
 };

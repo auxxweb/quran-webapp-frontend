@@ -1,5 +1,6 @@
 .main_section{
-    @apply w-[90%] rounded-3xl border-[1px] border-secondary  md:mx-20 px-10 pt-5 pb-2  bg-slate-300  font-primary
+    box-shadow: 10px 10px 15px rgba(147, 160, 188, 0.7);
+    @apply w-full md:w-[90%] rounded-3xl border-[1px] border-secondary  md:mx-20 px-10 pt-5 pb-2  bg-slate-300  font-primary
 }
 .titile{
     @apply text-[20px] md:text-[25px] font-medium text-start text-secondary 

@@ -1,6 +1,6 @@
 .card{
     box-shadow: inset 4px 4px 8px rgb(212, 212, 212);
-    @apply w-full bg-white py-3 rounded-2xl flex justify-center 
+    @apply w-[40%] sm:w-[20%] md:w-full  bg-white py-3 rounded-2xl flex justify-center 
 }
 
 .qusetionText{
@@ -12,9 +12,9 @@
 }
 
 .completedCard{
-    @apply w-full bg-[#0B9D64] py-3 rounded-2xl flex justify-center 
+    @apply w-[40%] sm:w-[20%] md:w-full  bg-[#0B9D64] py-3 rounded-2xl flex justify-center 
 }
 
 .nextCard{
-    @apply w-full bg-secondary py-3 rounded-2xl flex justify-center 
+    @apply w-[40%] sm:w-[20%] md:w-full bg-secondary py-3 rounded-2xl flex justify-center 
 }

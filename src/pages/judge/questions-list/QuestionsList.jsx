@@ -33,7 +33,7 @@ const QuestionsListPage = () => {
         </div>
         <div className={styles.header}>
           <div className={styles.userDetailes}>
-            <NextButton />
+            <NextButton text={'Next'} />
           </div>
         </div>
       </div>

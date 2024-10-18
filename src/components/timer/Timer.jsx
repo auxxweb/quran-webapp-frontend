@@ -1,75 +1,73 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-const Timer5 = () => {
-  const [countDownTime, setCountDownTime] = useState({ seconds: 0 });
-  const secondCircle = useRef();
+import React, { useState, useEffect } from 'react';
 
-  const changeCircleOffset = (seconds) => {
-    if (secondCircle.current) {
-      secondCircle.current.style.strokeDashoffset = `${
-        seconds > 0 ? 251 - (seconds * 251) / 60 : 251
-      }px`;
-    }
-  };
-
-  const getTimeDifference = useCallback((countDownDate) => {
-    const currentTime = new Date().getTime();
-    const timeDifference = countDownDate - currentTime;
-    const seconds = Math.floor((timeDifference % (60 * 1000)) / 1000);
-
-    if (timeDifference < 0) {
-      changeCircleOffset(seconds);
-      setCountDownTime({ seconds: 0 });
-      clearInterval();
-    } else {
-      changeCircleOffset(seconds);
-      setCountDownTime({ seconds });
-    }
-  }, []);
-
-  const startCountDown = useCallback(() => {
-    const customDate = new Date();
-    const countDownDate = new Date(
-      customDate.getFullYear(),
-      customDate.getMonth(),
-      customDate.getDate(),
-      customDate.getHours(),
-      customDate.getMinutes(),
-      customDate.getSeconds() + 60 // 60-second countdown
-    );
-
-    setInterval(() => {
-      getTimeDifference(countDownDate.getTime());
-    }, 1000);
-  }, [getTimeDifference]);
+const CircularTimer = () => {
+  const totalSeconds = 1200; 
+  const [seconds, setSeconds] = useState(0); 
 
   useEffect(() => {
-    startCountDown();
-  }, [startCountDown]);
+    const interval = setInterval(() => {
+      setSeconds((prev) => {
+        if (prev >= totalSeconds) {
+          clearInterval(interval); 
+          return prev; 
+        }
+        return prev + 1; 
+      });
+    }, 1000);
+
+    return () => clearInterval(interval); 
+  }, []);
+
+  const radius = 45;
+  const minStroke = 4; 
+  const maxStroke = 12; 
+  const normalizedRadius = radius - maxStroke; 
+  const circumference = normalizedRadius * 2 * Math.PI;
+  const strokeDashoffset = circumference - (seconds / totalSeconds) * circumference;
+
+  const strokeWidth = Math.floor(
+    minStroke + (maxStroke - minStroke) * (seconds / totalSeconds)
+  );
+
+  const strokeColor = seconds >= totalSeconds ? '#FF6347' : '#38A169'; 
 
   return (
-    <div className="relative bg-[#E9EAF0] rounded-full h-20 w-20">
-      <svg className="-rotate-90 h-24 w-24">
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#f0f4f8', 
+        padding: '20px',
+        borderRadius: '50%', 
+        width: '120px', 
+        height: '120px',
+      }}
+    >
+      <svg height={radius * 2} width={radius * 2}>
         <circle
-          r="40"
-          cx="50"
-          cy="50"
-          className="fill-transparent stroke-[#0B9D64] stroke-[7px]"
-        ></circle>
-        <circle
-          r="40"
-          ref={secondCircle}
-          cx="50"
-          cy="50"
-          style={{ strokeDasharray: "251px" }}
-          className="fill-transparent stroke-white stroke-[7px]"
-        ></circle>
+          stroke={strokeColor} 
+          fill="transparent"
+          strokeWidth={strokeWidth} 
+          strokeDasharray={`${circumference} ${circumference}`}
+          style={{ strokeDashoffset, transition: 'stroke-dashoffset 1s linear, stroke-width 1s linear' }} // Smooth transition
+          r={normalizedRadius}
+          cx={radius}
+          cy={radius}
+        />
       </svg>
-      <div className="text-white absolute top-7 left-6 text-xl font-semibold flex flex-col items-center ">
-        <span className="text-center">{countDownTime?.seconds}</span>
-   
+      <div
+      className='z-10'
+        style={{
+          position: 'absolute',
+          fontSize: '32px',
+          color: '#38A169', 
+        }}
+      >
+        {Math.floor(seconds / 60)}:{(seconds % 60).toString().padStart(2, '0')} 
       </div>
     </div>
   );
 };
 
-export default Timer5;
+export default CircularTimer;

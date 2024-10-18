@@ -1,10 +1,10 @@
 .card {
     box-shadow: 10px 7px 15px rgba(194, 223, 250, 0.5);
-    @apply bg-[#eff1f4] md:block hidden rounded-3xl w-[100%] md:w-[40%] lg:w-[10%] xl:w-[9%] my-5 xl:p-0 ;
+    @apply bg-[#eff1f4]  rounded-3xl w-[100%] md:w-[20%] lg:w-[14%] xl:w-[9%] my-5 xl:p-0 ;
   }
   
   .card_header {
-    @apply p-3 space-y-2 md:space-y-3  sm:p-8;
+    @apply flex flex-wrap md:block  justify-center p-6 gap-y-4 space-y-0 md:space-y-4 space-x-4 md:space-x-0 ;
   }
   
   .card_name {
