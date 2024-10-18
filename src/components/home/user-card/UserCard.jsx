@@ -14,12 +14,12 @@ const UserCard = ({user}) => {
           <div className={styles.profileImageWrapper}>
             <img
               className={styles.profileImage}
-              src={user.image}
+              src={user.image??'/images/profileImage.jpg'}
               alt="User-Profile"
             />
           </div>
           <h1 className={styles.userNameText}>
-            {user.userName}
+            {user.name}
           </h1>
         </div>
       </div>

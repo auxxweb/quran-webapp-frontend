@@ -19,9 +19,9 @@ const UserPopup = ({ setIsOpen, user }) => {
           </div>
           <div className={styles.photoContainer}>
             <div className={styles.photoWrapper}>
-              <img className={styles.photo} src={user.image} alt="John Doe" />
+              <img className={styles.photo} src={user.image??'/images/profileImage.jpg'} alt="John Doe" />
             </div>
-            <div className={styles.nameText}>{user.userName}</div>
+            <div className={styles.nameText}>{user.name}</div>
             <div className="flex justify-center">
               <div className="flex w-[50vh] flex-col gap-3">
                 <InfoRow title="Phone" colour ={true} data={user.phone} />
@@ -35,7 +35,7 @@ const UserPopup = ({ setIsOpen, user }) => {
               </div>
             </div>
               <div className="flex w-full justify-center mb-5 mt-7">
-                <button onClick={()=>navigate("/judge/current-participant/id")} className={styles.button}>
+                <button onClick={()=>navigate("/judge/current-participant/"+user._id)} className={styles.button}>
                   Select
                 </button>
               </div>
