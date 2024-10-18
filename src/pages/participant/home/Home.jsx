@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "./home.module.css";
-import CurrentParticipant from "../../../components/currentparticipant/CurrentParticipant";
 
 const Home = () => {
   const [userData, setUserData] = useState({

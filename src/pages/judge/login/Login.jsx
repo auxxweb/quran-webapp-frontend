@@ -4,19 +4,22 @@ import GradientButton from "../../../components/buttons/gradientbutton/GradientB
 import { loginValiDate } from "../../../utils/validate";
 import { post } from "../../../api/api";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { judgeDetails } from "../../../redux/judgeSlice";
 
 function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [submit, setSubmit] = useState(false);
   const [remember, setRemember] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
+    email: "",
     password: "",
   });
 
   const [formError, setFormError] = useState({
-    name_err: "",
+    email_err: "",
     password_err: "",
     remember_err: "",
     common_err: "",
@@ -38,18 +41,19 @@ function Login() {
     setSubmit(true);
     await loginValiDate(formData, setFormError, formError);
     if (remember) {
-      const responce = await post("/judge/auth/login/", formData);
-      console.log(responce);
-      if (responce?.success) {
+      const response = await post("/judge/auth/login/", formData);
+      if (response?.success) {
+        localStorage.setItem("access_token", response?.data?.token);
         setSubmit(false);
-        localStorage.setItem("access_token", responce?.data?.token);
+        dispatch(judgeDetails(response.data.name));
+        dispatch(judgeDetails(response.data?.name));
         navigate("/judge");
       } else {
         setFormError({
           ...formError,
-          name_err: responce.errors?.name ?? "",
-          password_err: responce.errors?.password ?? "",
-          common_err: responce.errors?.common ?? "",
+          email_err: response.errors?.email ?? "",
+          password_err: response.errors?.password ?? "",
+          common_err: response.errors?.common ?? "",
         });
       }
     } else {
@@ -85,7 +89,7 @@ function Login() {
               <div>
                 <input
                   type="text"
-                  name="name"
+                  name="email"
                   id="name"
                   className={styles.input}
                   placeholder="Username"
@@ -93,7 +97,7 @@ function Login() {
                 />
                 {submit && (
                   <p className="text-center text-red-500 text-sm">
-                    {formError.name_err}
+                    {formError.email_err}
                   </p>
                 )}
               </div>
@@ -137,6 +141,11 @@ function Login() {
                     </p>
                   )}
                 </div>
+                {submit && (
+                  <p className="text-center text-red-500 text-sm my-1">
+                    {formError.common_err}
+                  </p>
+                )}
               </div>
               <GradientButton onClick={handleSubmit} titile="Login" />
             </form>

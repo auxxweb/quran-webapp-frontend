@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import styles from "./navBar.module.css";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
   const navigate = useNavigate();
+  const judgeDetailsData = useSelector((state) => state.judgeInfo.judge);
+  console.log(judgeDetailsData);
 
   const [userData, setUserData] = useState({
     name: "David Cooper",
@@ -18,7 +21,7 @@ const NavBar = () => {
         <div className={styles.logoContainer}>
           <img
             className={styles.logoImage}
-            onClick={()=>navigate("/judge")}
+            onClick={() => navigate("/judge")}
             src="/images/logo_-name.png"
             alt="Company-logo"
           />
@@ -31,7 +34,7 @@ const NavBar = () => {
           />
           <div>
             <h1 className={styles.nameText}>
-              {userData.name} <br />
+              {judgeDetailsData?.name} <br />
               <span className={styles.locationText}>
                 <img
                   className={styles.locationIcon}
