@@ -23,7 +23,7 @@ const Home = () => {
               src="/images/homeLocation.png"
               alt="location-img"
             />
-            {userData.place}
+            {userData?.place}
           </h2>
         </div>
         {/* <div className={styles.currentparticipant}>
