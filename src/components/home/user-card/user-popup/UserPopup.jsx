@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styles from "./userPopup.module.css";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../../../utils/constant";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 var socket;
 
 const UserPopup = ({ setIsOpen, user ,handleSelectClick}) => {
