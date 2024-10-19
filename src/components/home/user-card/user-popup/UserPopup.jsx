@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styles from "./userPopup.module.css";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../../../utils/constant";
-// import { io } from "socket.io-client";
+import { io } from "socket.io-client";
 var socket;
 
 const UserPopup = ({ setIsOpen, user ,handleSelectClick}) => {
@@ -63,12 +63,12 @@ const UserPopup = ({ setIsOpen, user ,handleSelectClick}) => {
               </div>
             </div>
               <div className="flex w-full justify-center mb-5 mt-7">
-                {/* <button onClick={()=>navigate("/judge/current-participant/"+user._id)} className={styles.button}>
+                <button onClick={()=>navigate("/judge/current-participant/"+user._id)} className={styles.button}>
                   Select
-                </button> */}
-               <button onClick={handleSelectClick} className={styles.button}>
+                </button>
+               {/* <button onClick={handleSelectClick} className={styles.button}>
                 Select
-              </button>
+              </button> */}
               </div>
           </div>
         </div>
