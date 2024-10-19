@@ -19,8 +19,8 @@ function Login() {
   });
 
   const [formError, setFormError] = useState({
-    email_err: "",
-    password_err: "",
+    email_err: "Please enter a email",
+    password_err: "Please enter a  password s",
     remember_err: "",
     common_err: "",
   });
@@ -39,8 +39,11 @@ function Login() {
 
   const handleSubmit = async () => {
     setSubmit(true);
-    await loginValiDate(formData, setFormError, formError);
-    if (remember) {
+    const validate = await loginValiDate(formData, setFormError, formError);
+    if (!validate) {
+    }
+
+    if (remember && validate) {
       const response = await post("/judge/auth/login/", formData);
       if (response?.success) {
         localStorage.setItem("access_token", response?.data?.token);
@@ -92,7 +95,7 @@ function Login() {
                   name="email"
                   id="name"
                   className={styles.input}
-                  placeholder="Username"
+                  placeholder="Email"
                   onChange={handleChange}
                 />
                 {submit && (
@@ -135,18 +138,18 @@ function Login() {
                   <div className={styles.checkbox_label}>
                     <label htmlFor="remember">Remember me</label>
                   </div>
-                  {submit && (
-                    <p className="text-center text-red-500 text-sm my-1">
+                  {remember === false && (
+                    <p className="text-end text-red-500 text-sm ">
                       {formError.remember_err}
                     </p>
                   )}
                 </div>
-                {submit && (
-                  <p className="text-center text-red-500 text-sm my-1">
-                    {formError.common_err}
-                  </p>
-                )}
               </div>
+              {submit && (
+                <p className="text-center text-red-500 text-sm my-1">
+                  {formError.common_err}
+                </p>
+              )}
               <GradientButton onClick={handleSubmit} titile="Login" />
             </form>
           </div>

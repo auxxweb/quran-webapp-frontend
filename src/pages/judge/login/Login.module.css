@@ -70,7 +70,7 @@
 }
 
 .checkbox_label {
-  @apply font-bold -mt-1;
+  @apply font-bold ;
 }
 
 .checkbox_input:checked {
