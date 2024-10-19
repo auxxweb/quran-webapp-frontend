@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styles from "./home.module.css";
+import styles from "./currentParticipant.module.css";
 
-const Home = () => {
+const CurrentParticipant = () => {
   const [userData, setUserData] = useState({
     name: "David Cooper",
     place: "Calicut Zone",
@@ -26,7 +26,7 @@ const Home = () => {
             {userData.place}
           </h2>
         </div>
-        {/* <div className={styles.currentparticipant}>
+        <div className={styles.currentparticipant}>
           <div className={styles.card}>
             <div className={styles.card_header}>
               <div className={styles.card_welcome_title_div}>
@@ -44,13 +44,10 @@ const Home = () => {
               <h1 className={styles.card_name}>{userData.name}</h1>
             </div>
           </div>
-        </div> */}
-      </div>
-      <div className="h-full flex  justify-center items-center w-full">
-        <h1 className="text-2xl ">Welcom to calicut zone Quize compatition</h1>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default CurrentParticipant;

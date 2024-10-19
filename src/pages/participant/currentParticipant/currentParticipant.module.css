@@ -1,10 +1,10 @@
 .section {
     background-image: url("/public/images/backgroundimage.png");
-    @apply bg-cover bg-center min-h-screen h-full ;
+    @apply bg-cover bg-center ;
   }
   
   .container {
-    @apply  mx-5 pt-5 md:mx-28 md:pt-10  ;
+    @apply  mx-5 pt-5 md:mx-28 md:pt-10;
   }
   
   .header {
