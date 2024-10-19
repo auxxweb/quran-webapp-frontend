@@ -1,36 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./userPopup.module.css";
-import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../../../utils/constant";
-import { io } from "socket.io-client";
-var socket;
+import { useAppSelector } from "../../../../redux/store";
 
 const UserPopup = ({ setIsOpen, user ,handleSelectClick}) => {
-  const navigate = useNavigate();
 
-  
-  // useEffect(() => {
-  //   // Connect to the server
-  //   socket = io(BASE_URL);
-    
-  //   // Join the zone
-  //   socket.emit("join", "670e5df063e12ac02509fc9b");
+  const { judge } = useAppSelector((state) => state.judge);
 
-  //   // Listen for the selected-participant event
-  //   socket.on("selected-participant", ({ success, userId }) => {
-  //     console.log(userId,"userId");
-  //     if (success && userId) {
-        
-  //       // Navigate to the specific user page when the event is received
-  //       navigate(`/judge/current-participant/${userId}`);
-  //     }
-  //   });
-
-  //   return () => {
-  //     // Clean up the event listener when the component unmounts
-  //     socket.off("selected-participant");
-  //   };
-  // }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -62,14 +37,15 @@ const UserPopup = ({ setIsOpen, user ,handleSelectClick}) => {
                 />
               </div>
             </div>
-              <div className="flex w-full justify-center mb-5 mt-7">
-                {/* <button onClick={()=>navigate("/judge/current-participant/"+user._id)} className={styles.button}>
-                  Select
-                </button> */}
+            {
+              judge?.isMain &&
+                 <div className="flex w-full justify-center mb-5 mt-7">
                <button onClick={handleSelectClick} className={styles.button}>
                 Select
               </button>
               </div>
+            }
+           
           </div>
         </div>
       </div>

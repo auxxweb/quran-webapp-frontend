@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./navBar.module.css";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { clearJudge } from "../../redux/features/judgeSlice";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const judgeDetailsData = useSelector((state) => state.judgeInfo.judge);
-  console.log(judgeDetailsData);
-
-  const [userData, setUserData] = useState({
-    name: "David Cooper",
-    place: "Calicut",
-    profileImage:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  });
+  const { judge } = useAppSelector((state) => state.judge);
+  const dispatch = useAppDispatch();
+  console.log(judge, "judge");
+  const handleLogout = async () => {
+    dispatch(clearJudge());
+    navigate("/judge/login");
+  };
 
   return (
     <nav className={styles.navBarContainer}>
@@ -29,27 +28,29 @@ const NavBar = () => {
         <div className={styles.userProfileContainer}>
           <img
             className={styles.userProfileImage}
-            src={userData.profileImage}
+            src={judge?.image}
             alt="User-Profile"
           />
           <div>
             <h1 className={styles.nameText}>
-              {judgeDetailsData?.name} <br />
+              {judge?.name} <br />
               <span className={styles.locationText}>
                 <img
                   className={styles.locationIcon}
                   src="/images/location.png"
                   alt="User Profile"
                 />
-                {userData.place}
+                {judge.zone}
               </span>
             </h1>
           </div>
-          <img
-            className={styles.logoutImage}
-            src="/images/logout.png"
-            alt="User Profile"
-          />
+          <button onClick={handleLogout}>
+            <img
+              className={styles.logoutImage}
+              src="/images/logout.png"
+              alt="User Profile"
+            />
+          </button>
         </div>
       </div>
     </nav>

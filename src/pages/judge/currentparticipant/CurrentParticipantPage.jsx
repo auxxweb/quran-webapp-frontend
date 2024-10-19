@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import NavBar from "../../../components/navBar/NavBar";
 import styles from "./Participantpage.module.css";
 import CurrentParticipant from "../../../components/currentparticipant/CurrentParticipant";
+import { useAppSelector } from "../../../redux/store";
 
 const CurrentParticipantPage = () => {
-  const [userData, setUserData] = useState({
-    name: "David Cooper",
-    place: "Calicut Zone",
-  });
+  const { judge } = useAppSelector((state) => state.judge);
+
   return (
     <div className={styles.section}>
       <div className={styles.container}>
@@ -26,11 +25,11 @@ const CurrentParticipantPage = () => {
               src="/images/homeLocation.png"
               alt="location-img"
             />
-            {userData.place}
+            {judge.zone}
           </h2>
         </div>
         <div className={styles.currentparticipant}>
-          <CurrentParticipant />
+          <CurrentParticipant  />
         </div>
       </div>
     </div>

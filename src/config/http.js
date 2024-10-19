@@ -1,12 +1,21 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/constant";
-const baseURL = `${BASE_URL}/api`
+import { useAppDispatch, useAppSelector } from "../redux/store";
+import { clearJudge } from "../redux/features/judgeSlice";
 
-const Http = () => {
-  const instance = axios.create({ baseURL, withCredentials: true });
+const baseURL = `${BASE_URL}/api`;
+
+const useHttp = () => {
+  const { judge } = useAppSelector((state) => state.judge);
+  const dispatch = useAppDispatch();
+
+  const instance = axios.create({
+    baseURL,
+    withCredentials: true,
+  });
 
   instance.interceptors.request.use(async (request) => {
-    const token = localStorage.getItem("access_token");
+    const token = judge?.token; 
     if (token) {
       request.headers.Authorization = `Bearer ${token}`;
     }
@@ -23,9 +32,11 @@ const Http = () => {
 
         if (status === 401) {
           localStorage.clear();
-          if (localStorage.getItem("access_token")) {
-            localStorage.clear();
-            window.location.href = "/login";
+          dispatch(clearJudge());
+          if (judge?.token) {
+            dispatch(clearJudge());
+
+            window.location.href = "/judge/login";
           } else {
             return error?.response || { error: "An error occurred" };
           }
@@ -40,5 +51,4 @@ const Http = () => {
   return instance;
 };
 
-export default Http();
-
+export default useHttp;

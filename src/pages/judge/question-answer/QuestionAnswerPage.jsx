@@ -4,8 +4,11 @@ import QuestionsList from "../../../components/questions-answers/QuestionList";
 import QuestionAnswerCard from "../../../components/questionanswercard/QuestionAnswerCard";
 import CircularTimer from "../../../components/timer/Timer";
 import NextButton from "../../../components/buttons/next-button/NextButton";
+import { useAppSelector } from "../../../redux/store";
 
 function QuestionAnswerPage() {
+  const { judge } = useAppSelector((state) => state.judge);
+
   const [userData, setUserData] = useState({
     name: "David Cooper",
     place: "Calicut Zone",
@@ -25,7 +28,7 @@ function QuestionAnswerPage() {
               src="/images/homeLocation.png"
               alt="location-img"
             />
-            <h1 className={styles.zone_text}> {userData.place}</h1>
+            <h1 className={styles.zone_text}> {judge.zone}</h1>
           </div>
           <div className="ml-10">
             <CircularTimer />
