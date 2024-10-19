@@ -10,29 +10,19 @@ const UserCard = ({user}) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Connect to the server
     socket = io(BASE_URL);
-    
-    // Join the zone
     socket.emit("join", "670e5df063e12ac02509fc9b");
-
-    // Listen for the selected-participant event
     socket.on("selected-participant", ({ success, userId }) => {
-      console.log(userId,"userId");
       if (success && userId) {
-        
-        // Navigate to the specific user page when the event is received
         navigate(`/judge/current-participant/${userId}`);
       }
     });
 
     return () => {
-      // Clean up the event listener when the component unmounts
       socket.off("selected-participant");
     };
   }, []);
   const handleSelectClick = () => {
-    // Emit the selected-participant event to the server
     socket.emit("selected-participant", { success: true, userId: user?._id, zoneId: "670e5df063e12ac02509fc9b" });
   };
   return (

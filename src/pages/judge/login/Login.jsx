@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import styles from "./Login.module.css";
 import GradientButton from "../../../components/buttons/gradientbutton/GradientButton";
 import { loginValiDate } from "../../../utils/validate";
-import { post } from "../../../api/api";
+import {  useHttpRequests } from "../../../api/api";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { judgeDetails } from "../../../redux/judgeSlice";
+import { useAppDispatch } from "../../../redux/store";
+import { setJudge } from "../../../redux/features/judgeSlice";
 
 function Login() {
-  const dispatch = useDispatch();
+  const dispatch =useAppDispatch();
   const navigate = useNavigate();
+  const { post } = useHttpRequests();
   const [loading, setLoading] = useState(false);
   const [submit, setSubmit] = useState(false);
   const [remember, setRemember] = useState(false);
@@ -47,8 +48,7 @@ function Login() {
       if (response?.success) {
         localStorage.setItem("access_token", response?.data?.token);
         setSubmit(false);
-        dispatch(judgeDetails(response.data.name));
-        dispatch(judgeDetails(response.data?.name));
+        dispatch(setJudge(response.data));
         navigate("/judge");
       } else {
         setFormError({

@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import styles from "./home.module.css";
 import Users from "../../../components/home/users/Users";
 import Loading from "../../../components/loading/Loading";
+import { useAppSelector } from "../../../redux/store";
 
 const Home = () => {
-  const [userData, setUserData] = useState({
-    name: "David Cooper",
-    place: "Calicut Zone",
-  });
+  const { judge } = useAppSelector((state) => state.judge);
+
   return (
       <div className={styles.section}>
         <div className={styles.container}>
@@ -19,10 +18,10 @@ const Home = () => {
                 src="/images/homeLocation.png"
                 alt="location-img"
               />
-              {userData.place}
+              {judge.zone}
             </h2>
           </div>
-          <h1 className={styles.nameText}>{userData.name}</h1>
+          <h1 className={styles.nameText}>{judge.name}</h1>
           <Users />
         </div>
       </div>

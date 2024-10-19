@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./users.module.css";
 import SearchInput from "../../search-input/SearchInput";
 import UserCard from "../user-card/UserCard";
-import { get } from "../../../api/api";
+import {useHttpRequests } from "../../../api/api";
 
 const Users = () => {
   const [userData, setUserData] = useState([]);
@@ -10,7 +10,7 @@ const Users = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pagesToShow, setPagesToShow] = useState([]); 
   const [search, setSearch] = useState([]); 
-
+  const { get} = useHttpRequests();
   const handleSearchInputChange = (value) => {
     fetchUser(value);
   };

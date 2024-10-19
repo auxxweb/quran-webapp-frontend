@@ -4,6 +4,7 @@ import QuestionsList from "../../../components/questions-answers/QuestionList";
 import QuestionAnswerCard from "../../../components/questionanswercard/QuestionAnswerCard";
 import CircularTimer from "../../../components/timer/Timer";
 import NextButton from "../../../components/buttons/next-button/NextButton";
+import { useAppSelector } from "../../../redux/store";
 
 function QuestionAnswerPage() {
   const [userData, setUserData] = useState({
@@ -12,6 +13,7 @@ function QuestionAnswerPage() {
     profileImage:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   });
+  const { judge } = useAppSelector((state) => state.judge);
 
   const data = ["qId1", "qId2", "qId3", "qId4", "qId5", "qId6", "qId7"];
 
@@ -25,7 +27,7 @@ function QuestionAnswerPage() {
               src="/images/homeLocation.png"
               alt="location-img"
             />
-            {userData.place}
+            {judge.zone}
           </h2>
           <CircularTimer />
           <div className={styles.userDetailes}>
@@ -68,10 +70,12 @@ function QuestionAnswerPage() {
           </div>
         </div>
         <div className={styles.score_btn_div}>
-           <div className={styles.score_div}>
-            <h1><span>Score</span> <span className={styles.score_text}>44</span></h1>
-           </div>
-          <NextButton text={'Submit'}/>
+          <div className={styles.score_div}>
+            <h1>
+              <span>Score</span> <span className={styles.score_text}>44</span>
+            </h1>
+          </div>
+          <NextButton text={"Submit"} />
         </div>
       </div>
     </div>
