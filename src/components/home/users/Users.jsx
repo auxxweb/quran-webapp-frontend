@@ -24,7 +24,7 @@ const Users = () => {
     const data = await get(
       `/judge/users?currentPage=${currentPage}&&search=${search}`
     );
-    setUserData(data.participants);
+    setUserData(data?.participants);
     setPageCount(data.totalPages)
     updatePagination(currentPage, data.totalPages);
   };
