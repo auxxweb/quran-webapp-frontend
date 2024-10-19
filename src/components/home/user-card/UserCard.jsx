@@ -16,6 +16,8 @@ const UserCard = ({ user }) => {
     socket = io(BASE_URL);
     socket.emit("join", judge?.zoneId);
     socket.on("selected-participant", ({ success, userId }) => {
+
+      
       if (success && userId) {
         navigate(`/judge/current-participant/${userId}`);
       }

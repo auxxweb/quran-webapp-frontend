@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./QuestionAnswerPage.module.css";
 import QuestionsList from "../../../components/questions-answers/QuestionList";
 import QuestionAnswerCard from "../../../components/questionanswercard/QuestionAnswerCard";
 import CircularTimer from "../../../components/timer/Timer";
 import NextButton from "../../../components/buttons/next-button/NextButton";
 import { useAppSelector } from "../../../redux/store";
+import { useHttpRequests } from "../../../api/api";
+import { useParams } from "react-router-dom";
 
 function QuestionAnswerPage() {
   const { judge } = useAppSelector((state) => state.judge);
-
+  const [questionData, setQuestionData] = useState({
+    questions:[]
+  });
+  const [currentQuestion,setCurrentQuestion] = useState(0)
+  const { get } = useHttpRequests();
+  const { id } = useParams();
   const [userData, setUserData] = useState({
     name: "David Cooper",
     place: "Calicut Zone",
@@ -16,7 +23,16 @@ function QuestionAnswerPage() {
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   });
 
-  const data = ["qId1", "qId2", "qId3", "qId4", "qId5", "qId6", "qId7"];
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  const fetchUser = async () => {
+    const data = await get(`/judge/users/questions/${id}`);
+    console.log(data?.data, "data ------------------");
+
+    setQuestionData(data?.data);
+  };
 
   return (
     <div className={styles.section}>
@@ -50,18 +66,21 @@ function QuestionAnswerPage() {
         </div>
 
         <div className={styles.currentparticipant}>
-          <QuestionsList QuestionNumber={3} Questions={data} />
+          <QuestionsList
+            QuestionNumber={currentQuestion+1}
+            Questions={questionData?.questions}
+          />
           <div className={styles.question_main}>
             <QuestionAnswerCard
-              titile={"Question 1"}
+              titile={`Question ${currentQuestion+1}`}
               border={"#C19D5C"}
-              descrption={"What are some other names for the Quran?"}
+              descrption={questionData?.questions[currentQuestion]?.question}
             />
             <QuestionAnswerCard
               titile={"Answer"}
               border={"#0B9D64"}
               descrption={
-                "The Quran is also known as Al-Furqaan, Al-Kitaab, Al-Zikr, Al-Noor, and Al-HudaThe Quran is also known as Al-Furqaan, Al-Kitaab, Al-Zikr, Al-Noor, and Al-Huda"
+                questionData?.questions[currentQuestion]?.answer
               }
             />
             <textarea
