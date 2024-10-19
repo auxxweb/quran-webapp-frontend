@@ -1,17 +1,25 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
+import { io } from "socket.io-client";
 import ParticipantRoutes from "./Routes/ParticipantRoutes";
 import JudgeRoutes from "./Routes/JudgeRoutes";
-
+import { useEffect } from "react";
+import { BASE_URL } from "./utils/constant";
+var socket;
 function App() {
-  
+  const navigate = useNavigate();
+
   return (
-    <Router>
+
       <Routes>
-        <Route path="/judge/*"  element={<JudgeRoutes />} />
+        <Route path="/judge/*" element={<JudgeRoutes />} />
         <Route path="/participant/*" element={<ParticipantRoutes />} />
       </Routes>
-    </Router>
+
   );
 }
 
