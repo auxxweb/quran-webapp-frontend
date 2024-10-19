@@ -68,7 +68,7 @@ const Users = () => {
           <SearchInput onSearchInputChange={handleSearchInputChange} />
         </div>
         <div className={styles.userContainer}>
-          {userData.map((user, index) => (
+          {userData?.map((user, index) => (
             <UserCard user={user} key={index} />
           ))}
         </div>
