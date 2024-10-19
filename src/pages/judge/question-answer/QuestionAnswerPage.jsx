@@ -7,13 +7,14 @@ import NextButton from "../../../components/buttons/next-button/NextButton";
 import { useAppSelector } from "../../../redux/store";
 
 function QuestionAnswerPage() {
+  const { judge } = useAppSelector((state) => state.judge);
+
   const [userData, setUserData] = useState({
     name: "David Cooper",
     place: "Calicut Zone",
     profileImage:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   });
-  const { judge } = useAppSelector((state) => state.judge);
 
   const data = ["qId1", "qId2", "qId3", "qId4", "qId5", "qId6", "qId7"];
 
@@ -21,15 +22,18 @@ function QuestionAnswerPage() {
     <div className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.WelcomeText}>
+          <div className={styles.WelcomeText}>
             <img
               className={styles.locationImage}
               src="/images/homeLocation.png"
               alt="location-img"
             />
-            {judge.zone}
-          </h2>
-          <CircularTimer />
+            <h1 className={styles.zone_text}> {judge.zone}</h1>
+          </div>
+          <div className="ml-10">
+            <CircularTimer />
+          </div>
+
           <div className={styles.userDetailes}>
             <h2 className={styles.WelcomeText}>
               <img
