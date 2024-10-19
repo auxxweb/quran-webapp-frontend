@@ -19,15 +19,18 @@ function QuestionAnswerPage() {
     <div className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.WelcomeText}>
+          <div className={styles.WelcomeText}>
             <img
               className={styles.locationImage}
               src="/images/homeLocation.png"
               alt="location-img"
             />
-            {userData.place}
-          </h2>
-          <CircularTimer />
+            <h1 className={styles.zone_text}> {userData.place}</h1>
+          </div>
+          <div className="ml-10">
+            <CircularTimer />
+          </div>
+
           <div className={styles.userDetailes}>
             <h2 className={styles.WelcomeText}>
               <img
@@ -68,10 +71,12 @@ function QuestionAnswerPage() {
           </div>
         </div>
         <div className={styles.score_btn_div}>
-           <div className={styles.score_div}>
-            <h1><span>Score</span> <span className={styles.score_text}>44</span></h1>
-           </div>
-          <NextButton text={'Submit'}/>
+          <div className={styles.score_div}>
+            <h1>
+              <span>Score</span> <span className={styles.score_text}>44</span>
+            </h1>
+          </div>
+          <NextButton text={"Submit"} />
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@
 }
 
 .container {
-  @apply mx-5 pt-5   md:pt-5;
+  @apply mx-5 pt-5   md:pt-5 font-primary;
 }
 
 .header {
@@ -13,13 +13,8 @@
 
 .WelcomeText {
   @apply flex 
-  justify-end
-  font-[Amiri-Quran] 
-  text-[12px]
-  lg:text-2xl font-normal 
-  leading-[24px]
-   tracking-[0.38px] 
-    items-center gap-4;
+  justify-start
+    items-start gap-4;
 }
 
 /* .nameText {
@@ -39,7 +34,7 @@
 }
 
 .nameText {
-  @apply text-[20px] md:text-[41px] font-bold text-[#0BA066] font-sans;
+  @apply text-[20px] md:text-[25px] font-bold text-[#0BA066] mt-5 font-primary;
 }
 
 .userDetailes {
@@ -47,11 +42,11 @@
 }
 
 .main_title {
-  @apply text-[20px] md:text-[36px] font-medium text-start text-secondary;
+  @apply text-[20px] md:text-[26px] font-medium text-start text-secondary font-primary;
 }
 
 .profileImage {
-  @apply rounded-full w-[28px] h-[28px] md:w-[90px] md:h-[90px]  hidden lg:block;
+  @apply rounded-full w-[20px] h-[20px] md:w-[70px] md:h-[70px]  hidden lg:block;
 }
 
 .question_main {
@@ -63,7 +58,7 @@
   line-height: 1.2;
   font-size: 16px;
   box-shadow: 10px 10px 15px rgba(147, 160, 188, 0.7);
-  @apply w-full md:w-[90%] text-xl rounded-3xl border-[1px] border-[#0B9D64] mx-0 md:mx-20 px-10 pt-5 pb-2  bg-slate-300  font-primary placeholder:text-start placeholder:text-[#0B9D64] placeholder:text-[20px] md:placeholder:text-[25px] placeholder:font-medium;
+  @apply w-full md:w-[90%] text-xl rounded-3xl border-[1px] border-gray-400 focus:border-[#0B9D64] mx-0 md:mx-20 px-10 pt-5 pb-2 bg-slate-300 font-primary placeholder:text-start placeholder:text-[#0B9D64] placeholder:text-[20px] md:placeholder:text-[25px] placeholder:font-medium ;
 }
 .titile {
   @apply text-[20px] md:text-[25px] font-medium text-start text-secondary;
@@ -73,14 +68,23 @@
   @apply text-center text-xl text-[25px]  leading-8 my-2;
 }
 
-.score_div{
+.score_div {
   box-shadow: 10px 7px 15px rgba(194, 223, 250, 0.5);
-  @apply py-5 md:py-8 px-10 my-11 md:my-5 md:px-16 text-black  bg-primary  rounded-lg text-sm lg:text-[20px] font-semibold
+  @apply py-5 md:py-3 px-10 my-11 md:my-5 md:px-16 text-black  bg-primary  rounded-lg text-sm lg:text-[20px] font-semibold;
 }
-.score_btn_div{
-  @apply flex justify-end gap-10 mx-5 lg:mx-16 items-center
+.score_btn_div {
+  @apply flex justify-end gap-10 mx-5 lg:mx-16 items-center;
 }
-.score_text{
-  @apply text-[#0B9D64] text-3xl mx-2
-  
+.score_text {
+  @apply text-[#0B9D64] text-3xl mx-2;
+}
+
+.zone_text {
+  @apply font-[Amiri-Quran] 
+  pt-2
+  text-[12px]
+  lg:text-2xl font-normal 
+  leading-[24px]
+ 
+   tracking-[0.38px];
 }
