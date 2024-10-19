@@ -21,23 +21,17 @@ const CurrentParticipant = () => {
     })();
   }, [id]);
   useEffect(() => {
-    // Connect to the server
     socket = io(BASE_URL);
+    socket.emit("join", judge?.zoneId);
 
-    // Join the zone
-    socket.emit("join", "670e5df063e12ac02509fc9b");
-
-    // Listen for the selected-participant event
     socket.on("proceed-question", ({ success, resultId }) => {
       console.log(resultId, "resultId");
       if (success && resultId) {
-        // Navigate to the specific user page when the event is received
         navigate("/judge/question-answer/" + resultId);
       }
     });
 
     return () => {
-      // Clean up the event listener when the component unmounts
       socket.off("selected-participant");
     };
   }, []);
@@ -60,7 +54,7 @@ const CurrentParticipant = () => {
       socket.emit("proceed-question", {
         success: true,
         resultId,
-        zoneId: "670e5df063e12ac02509fc9b",
+        zoneId:judge?.zoneId,
       });
     }
   };
