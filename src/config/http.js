@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseURL = 'https://gedexoquizserver.auxxweb.in/api'
+import { BASE_URL } from "../utils/constant";
+const baseURL = `${BASE_URL}/api`
 
 const Http = () => {
   const instance = axios.create({ baseURL, withCredentials: true });
