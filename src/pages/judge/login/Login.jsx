@@ -40,8 +40,7 @@ function Login() {
   const handleSubmit = async () => {
     setSubmit(true);
     const validate = await loginValiDate(formData, setFormError, formError);
-    if (!validate) {
-    }
+
 
     if (remember && validate) {
       const response = await post("/judge/auth/login/", formData);

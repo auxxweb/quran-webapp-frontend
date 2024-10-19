@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./home.module.css";
-
+import { io } from "socket.io-client";
+import { BASE_URL } from "../../../utils/constant";
+import { useNavigate } from "react-router-dom";
+var socket;
 const Home = () => {
   const [userData, setUserData] = useState({
     name: "David Cooper",
@@ -8,6 +11,30 @@ const Home = () => {
     profileImage:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Connect to the server
+    socket = io(BASE_URL);
+    
+    // Join the zone
+    socket.emit("join", "670e5df063e12ac02509fc9b");
+
+    // Listen for the selected-participant event
+    socket.on("selected-participant", ({ success, userId }) => {
+      console.log(userId,"userId");
+      if (success && userId) {
+        
+        // Navigate to the specific user page when the event is received
+        navigate(`/participant/${userId}`);
+      }
+    });
+
+    return () => {
+      // Clean up the event listener when the component unmounts
+      socket.off("selected-participant");
+    };
+  }, []);
   return (
     <div className={styles.section}>
       <div className={styles.container}>
