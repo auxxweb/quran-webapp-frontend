@@ -70,7 +70,7 @@
 
 .score_div {
   box-shadow: 10px 7px 15px rgba(194, 223, 250, 0.5);
-  @apply py-5 md:py-3 px-10 my-11 md:my-5 md:px-16 text-black  bg-primary  rounded-lg text-sm lg:text-[20px] font-semibold;
+  @apply py-2 md:py-6 px-10 my-11 md:my-5 md:px-5 text-black  bg-primary  rounded-lg text-sm lg:text-[20px] font-semibold;
 }
 .score_btn_div {
   @apply flex justify-end gap-10 mx-5 lg:mx-16 items-center;

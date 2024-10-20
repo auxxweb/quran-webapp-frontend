@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./NextButton.module.css";
 
-const NextButton = ({text}) => {
+const NextButton = ({text,onClick}) => {
   return (
-    <button type="button" className={styles.next_button}>
+    <button onClick={onClick} type="button" className={styles.next_button}>
      {text}
     </button>
   );

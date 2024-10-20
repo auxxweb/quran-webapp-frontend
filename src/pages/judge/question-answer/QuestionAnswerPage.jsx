@@ -6,16 +6,20 @@ import CircularTimer from "../../../components/timer/Timer";
 import NextButton from "../../../components/buttons/next-button/NextButton";
 import { useAppSelector } from "../../../redux/store";
 import { useHttpRequests } from "../../../api/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function QuestionAnswerPage() {
   const { judge } = useAppSelector((state) => state.judge);
   const [questionData, setQuestionData] = useState({
-    questions:[]
+    questions: [],
   });
-  const [currentQuestion,setCurrentQuestion] = useState(0)
-  const { get } = useHttpRequests();
+  const [updateData, setUpdateData] = useState({ answer: "", mark: "" });
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [latestCurrentQuestionIndex, setLatestCurrentQuestionIndex] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const { get,post } = useHttpRequests();
   const { id } = useParams();
+  const navigate = useNavigate()
   const [userData, setUserData] = useState({
     name: "David Cooper",
     place: "Calicut Zone",
@@ -24,16 +28,91 @@ function QuestionAnswerPage() {
   });
 
   useEffect(() => {
-    fetchUser();
+    fetchQuestionAndAnswer();
   }, []);
 
-  const fetchUser = async () => {
+  const fetchQuestionAndAnswer = async () => {
     const data = await get(`/judge/users/questions/${id}`);
     console.log(data?.data, "data ------------------");
 
     setQuestionData(data?.data);
+    findNextUnansweredQuestion(data?.data?.questions);
   };
 
+  // Function to find the next unanswered question
+  const findNextUnansweredQuestion = (questions) => {
+    const judgeId = judge?.id; // Get current judge's ID
+    console.log(questions, "questions");
+    console.log(judge, "judge");
+    console.log(questions.length === 0, "questions.length === 0");
+    console.log(judgeId, "judgeIdjudgeIdjudgeIdjudgeId");
+
+    if (!questions || questions.length === 0 || !judgeId) return;
+    console.log("hey hello---------------------");
+
+    // Loop through questions to find the first one the current judge hasn't answered
+    for (let i = 0; i < questions.length; i++) {
+      const notSubmitted = questions[i].submittedAnswers.find(
+        (answer) => answer.judge_id === judgeId &&  answer.isCompleted === true
+      );
+      // const submitted = questions[i].submittedAnswers.find(
+      //   (answer) => answer.judge_id === judgeId && answer.isCompleted === fals
+      // );
+      console.log(notSubmitted, "submittedAnswer");
+
+      // If no answer is found for the current judge, set that as the current question
+      if (!notSubmitted ) {
+        setCurrentQuestion(notSubmitted);
+        setCurrentQuestionIndex(i);
+        setLatestCurrentQuestionIndex(i)
+        break;
+      }
+    }
+  };
+  console.log(currentQuestionIndex, "current question");
+  const judgeAnswer = currentQuestion?.submittedAnswers?.find(
+    (answer) => answer.judge_id === judge?.id 
+  );
+  const handleSubmit = async () => {
+    if (!judge?.isMain &&!judgeAnswer?.isCompleted) {
+      if(!updateData?.answer){
+        alert("Please enter answer ")
+        
+        
+      }else if(!updateData?.mark){
+        alert("Please enter mark ")
+
+      }
+      else{
+        // setCurrentQuestionIndex(currentQuestionIndex+1)
+       
+        const data = await post("/judge/users/submit-answers", {
+          answer_id: currentQuestion?._id,
+          result_id: id,
+          question_id:questionData?.questions[currentQuestionIndex]?._id,
+          answer:updateData?.answer,
+          score:updateData?.mark,
+          endTime: new Date(),
+        });
+        if (data?.success) {
+          navigate(`/judge/questions-list/${id}`)
+
+          alert("submitted")
+        }
+      }
+    }else{
+      navigate(`/judge/questions-list/${id}`)
+    }
+  };
+  console.log(currentQuestion,"current question");
+  
+
+  const handleChange = (value, field) => {
+    setUpdateData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  console.log(judgeAnswer,"judgeAnswer");
+  
   return (
     <div className={styles.section}>
       <div className={styles.container}>
@@ -67,38 +146,55 @@ function QuestionAnswerPage() {
 
         <div className={styles.currentparticipant}>
           <QuestionsList
-            QuestionNumber={currentQuestion+1}
+            QuestionNumber={latestCurrentQuestionIndex + 1}
+            setCurrentQuestion={setCurrentQuestion}
+            setCurrentQuestionIndex={setCurrentQuestionIndex}
             Questions={questionData?.questions}
           />
           <div className={styles.question_main}>
             <QuestionAnswerCard
-              titile={`Question ${currentQuestion+1}`}
+              titile={`Question ${currentQuestionIndex + 1}`}
               border={"#C19D5C"}
-              descrption={questionData?.questions[currentQuestion]?.question}
+              descrption={questionData?.questions[currentQuestionIndex]?.question}
             />
             <QuestionAnswerCard
               titile={"Answer"}
               border={"#0B9D64"}
-              descrption={
-                questionData?.questions[currentQuestion]?.answer
-              }
+              descrption={questionData?.questions[currentQuestionIndex]?.answer}
             />
-            <textarea
-              rows={8}
-              cols="50"
-              type="text"
-              className={styles.main_section}
-              placeholder="Participant’s Answer"
-            />
+            {!judge?.isMain && (
+              <textarea
+                rows={8}
+                cols="50"
+                type="text"
+                disabled={judgeAnswer?.isCompleted}
+                value={judgeAnswer?.isCompleted? judgeAnswer?.answer: updateData?.answer}
+                onChange={(e) => handleChange(e.target.value, "answer")}
+                className={styles.main_section}
+                placeholder="Participant’s Answer"
+              />
+            )}
           </div>
         </div>
         <div className={styles.score_btn_div}>
-          <div className={styles.score_div}>
-            <h1>
-              <span>Score</span> <span className={styles.score_text}>44</span>
-            </h1>
-          </div>
-          <NextButton text={"Submit"} />
+          {!judge?.isMain && (
+            <div className={styles.score_div}>
+              <div className="max-w-max  flex items-center space-x-5">
+                <span>Score</span>{" "}
+                <input
+                  type="number"
+                  value={judgeAnswer?.isCompleted? judgeAnswer?.score :updateData?.mark}
+                  disabled={judgeAnswer?.isCompleted}
+                  onChange={(e) => handleChange(e.target.value, "mark")}
+                  min={0}
+                  className={`bg-transparent w-28 px-2 py-1 text-center text-[#0B9D64] text-3xl`}
+                />
+              </div>
+            </div>
+          )}
+          <button onClick={handleSubmit}>
+            <NextButton text={(judge?.isMain||judgeAnswer?.isCompleted)  ? "Next" : "Submit"} />
+          </button>
         </div>
       </div>
     </div>
