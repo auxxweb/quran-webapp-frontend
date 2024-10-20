@@ -15,17 +15,14 @@ function QuestionAnswerPage() {
   });
   const [updateData, setUpdateData] = useState({ answer: "", mark: "" });
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [latestCurrentQuestionIndex, setLatestCurrentQuestionIndex] = useState(0);
+  const [latestCurrentQuestionIndex, setLatestCurrentQuestionIndex] =
+    useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const { get,post } = useHttpRequests();
-  const { id } = useParams();
-  const navigate = useNavigate()
-  const [userData, setUserData] = useState({
-    name: "David Cooper",
-    place: "Calicut Zone",
-    profileImage:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  });
+  const { get, post } = useHttpRequests();
+  const { id, questionId } = useParams();
+
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     fetchQuestionAndAnswer();
@@ -33,86 +30,53 @@ function QuestionAnswerPage() {
 
   const fetchQuestionAndAnswer = async () => {
     const data = await get(`/judge/users/questions/${id}`);
-    console.log(data?.data, "data ------------------");
 
     setQuestionData(data?.data);
     findNextUnansweredQuestion(data?.data?.questions);
   };
 
-  // Function to find the next unanswered question
   const findNextUnansweredQuestion = (questions) => {
-    const judgeId = judge?.id; // Get current judge's ID
-    console.log(questions, "questions");
-    console.log(judge, "judge");
-    console.log(questions.length === 0, "questions.length === 0");
-    console.log(judgeId, "judgeIdjudgeIdjudgeIdjudgeId");
-
-    if (!questions || questions.length === 0 || !judgeId) return;
-    console.log("hey hello---------------------");
-
-    // Loop through questions to find the first one the current judge hasn't answered
-    for (let i = 0; i < questions.length; i++) {
-      const notSubmitted = questions[i].submittedAnswers.find(
-        (answer) => answer.judge_id === judgeId &&  answer.isCompleted === true
-      );
-      // const submitted = questions[i].submittedAnswers.find(
-      //   (answer) => answer.judge_id === judgeId && answer.isCompleted === fals
-      // );
-      console.log(notSubmitted, "submittedAnswer");
-
-      // If no answer is found for the current judge, set that as the current question
-      if (!notSubmitted ) {
-        setCurrentQuestion(notSubmitted);
-        setCurrentQuestionIndex(i);
-        setLatestCurrentQuestionIndex(i)
-        break;
-      }
-    }
+    const currentQuestionIndexFind = questions?.findIndex(
+      (que) => que?._id === questionId
+    );
+    setCurrentQuestionIndex(currentQuestionIndexFind);
+    setLatestCurrentQuestionIndex(currentQuestionIndexFind);
+    setCurrentQuestion(questions[currentQuestionIndexFind]);
   };
-  console.log(currentQuestionIndex, "current question");
   const judgeAnswer = currentQuestion?.submittedAnswers?.find(
-    (answer) => answer.judge_id === judge?.id 
+    (answer) => answer.judge_id === judge?.id
   );
   const handleSubmit = async () => {
-    if (!judge?.isMain &&!judgeAnswer?.isCompleted) {
-      if(!updateData?.answer){
-        alert("Please enter answer ")
-        
-        
-      }else if(!updateData?.mark){
-        alert("Please enter mark ")
+    if (!judge?.isMain && !judgeAnswer?.isCompleted) {
+      if (!updateData?.answer) {
+        alert("Please enter answer ");
+      } else if (!updateData?.mark) {
+        alert("Please enter mark ");
+      } else {
 
-      }
-      else{
-        // setCurrentQuestionIndex(currentQuestionIndex+1)
-       
         const data = await post("/judge/users/submit-answers", {
-          answer_id: currentQuestion?._id,
+          answer_id: judgeAnswer?._id,
           result_id: id,
-          question_id:questionData?.questions[currentQuestionIndex]?._id,
-          answer:updateData?.answer,
-          score:updateData?.mark,
+          question_id: questionId,
+          answer: updateData?.answer,
+          score: updateData?.mark,
           endTime: new Date(),
         });
         if (data?.success) {
-          navigate(`/judge/questions-list/${id}`)
+          navigate(`/judge/questions-list/${id}/${questionId}`);
 
-          alert("submitted")
+          alert("submitted");
         }
       }
-    }else{
-      navigate(`/judge/questions-list/${id}`)
+    } else {
+      navigate(`/judge/questions-list/${id}/${questionId}`);
     }
   };
-  console.log(currentQuestion,"current question");
-  
 
   const handleChange = (value, field) => {
     setUpdateData((prev) => ({ ...prev, [field]: value }));
   };
 
-  console.log(judgeAnswer,"judgeAnswer");
-  
   return (
     <div className={styles.section}>
       <div className={styles.container}>
@@ -133,10 +97,10 @@ function QuestionAnswerPage() {
             <h2 className={styles.WelcomeText}>
               <img
                 className={styles.profileImage}
-                src={userData.profileImage}
+                src={questionData?.participant_image}
                 alt="location-img"
               />
-              <span className={styles.nameText}>{userData.name}</span>
+              <span className={styles.nameText}>{questionData?.participant_name}</span>
             </h2>
           </div>
         </div>
@@ -146,21 +110,21 @@ function QuestionAnswerPage() {
 
         <div className={styles.currentparticipant}>
           <QuestionsList
-            QuestionNumber={latestCurrentQuestionIndex + 1}
+            QuestionNumber={currentQuestionIndex + 1}
             setCurrentQuestion={setCurrentQuestion}
-            setCurrentQuestionIndex={setCurrentQuestionIndex}
+            setLatestCurrentQuestionIndex={setLatestCurrentQuestionIndex}
             Questions={questionData?.questions}
           />
           <div className={styles.question_main}>
             <QuestionAnswerCard
-              titile={`Question ${currentQuestionIndex + 1}`}
+              titile={`Question ${latestCurrentQuestionIndex + 1}`}
               border={"#C19D5C"}
-              descrption={questionData?.questions[currentQuestionIndex]?.question}
+              descrption={currentQuestion?.question}
             />
             <QuestionAnswerCard
               titile={"Answer"}
               border={"#0B9D64"}
-              descrption={questionData?.questions[currentQuestionIndex]?.answer}
+              descrption={currentQuestion?.answer}
             />
             {!judge?.isMain && (
               <textarea
@@ -168,7 +132,11 @@ function QuestionAnswerPage() {
                 cols="50"
                 type="text"
                 disabled={judgeAnswer?.isCompleted}
-                value={judgeAnswer?.isCompleted? judgeAnswer?.answer: updateData?.answer}
+                value={
+                  judgeAnswer?.isCompleted
+                    ? judgeAnswer?.answer
+                    : updateData?.answer
+                }
                 onChange={(e) => handleChange(e.target.value, "answer")}
                 className={styles.main_section}
                 placeholder="Participant’s Answer"
@@ -183,7 +151,11 @@ function QuestionAnswerPage() {
                 <span>Score</span>{" "}
                 <input
                   type="number"
-                  value={judgeAnswer?.isCompleted? judgeAnswer?.score :updateData?.mark}
+                  value={
+                    judgeAnswer?.isCompleted
+                      ? judgeAnswer?.score
+                      : updateData?.mark
+                  }
                   disabled={judgeAnswer?.isCompleted}
                   onChange={(e) => handleChange(e.target.value, "mark")}
                   min={0}
@@ -192,9 +164,15 @@ function QuestionAnswerPage() {
               </div>
             </div>
           )}
-          <button onClick={handleSubmit}>
-            <NextButton text={(judge?.isMain||judgeAnswer?.isCompleted)  ? "Next" : "Submit"} />
-          </button>
+          {!judgeAnswer?.isCompleted && (
+            <button onClick={handleSubmit}>
+              <NextButton
+                text={
+                  judge?.isMain || judgeAnswer?.isCompleted ? "Next" : "Submit"
+                }
+              />
+            </button>
+          )}
         </div>
       </div>
     </div>

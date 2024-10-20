@@ -25,7 +25,7 @@ const JudgeRoutes = () => {
           }
         />
         <Route
-          path="/questions-list/:id"
+          path="/questions-list/:id/:questionId"
           element={
             <Layout>
               <QuestionsListPage />
@@ -41,7 +41,7 @@ const JudgeRoutes = () => {
           }
         />
         <Route
-          path="/question-answer/:id"
+          path="/question-answer/:id/:questionId"
           element={
             <Layout>
               <QuestionAnswerPage />

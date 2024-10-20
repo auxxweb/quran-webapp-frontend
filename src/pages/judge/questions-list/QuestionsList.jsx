@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../../../components/navBar/NavBar";
 import styles from "./QuestionsList.module.css";
 import QuestionsList from "../../../components/Questions/QuestionsList";
 import NextButton from "../../../components/buttons/next-button/NextButton";
@@ -19,25 +18,30 @@ const QuestionsListPage = () => {
     questions: [],
   });
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [latestCurrentQuestionIndex, setLatestCurrentQuestionIndex] =
-    useState(0);
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const { get, post } = useHttpRequests();
-  const { id } = useParams();
+  const { id, questionId } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
     socket = io(BASE_URL);
+
     socket.emit("join", judge?.zoneId);
 
-    socket.on("proceed-question", ({ success, resultId }) => {
-      console.log(resultId, "resultId");
-      if (success && resultId) {
-        navigate("/judge/question-answer/" + resultId);
+    socket.on("proceed-question", ({ success, resultId, questionId }) => {
+      if (success && resultId && questionId) {
+        navigate("/judge/question-answer/" + resultId + "/" + questionId);
+      }
+    });
+    socket.on("question-completed", ({ success }) => {
+      if (success) {
+        navigate("/judge");
       }
     });
 
     return () => {
-      socket.off("selected-participant");
+      socket.off("proceed-question");
+      socket.off("question-completed");
     };
   }, []);
 
@@ -47,67 +51,56 @@ const QuestionsListPage = () => {
 
   const fetchQuestionAndAnswer = async () => {
     const data = await get(`/judge/users/questions/${id}`);
-    console.log(data?.data, "data ------------------");
 
     setQuestionData(data?.data);
     findNextUnansweredQuestion(data?.data?.questions);
   };
 
-  // Function to find the next unanswered question
   const findNextUnansweredQuestion = (questions) => {
-    const judgeId = judge?.id; // Get current judge's ID
-    console.log(questions, "questions");
-    console.log(judge, "judge");
-    console.log(questions.length === 0, "questions.length === 0");
-    console.log(judgeId, "judgeIdjudgeIdjudgeIdjudgeId");
-
-    if (!questions || questions.length === 0 || !judgeId) return;
-    console.log("hey hello---------------------");
-
-    // Loop through questions to find the first one the current judge hasn't answered
-    for (let i = 0; i < questions.length; i++) {
-      const notSubmitted = questions[i].submittedAnswers.find(
-        (answer) => answer.judge_id === judgeId && answer.isCompleted === true
-      );
-      // const submitted = questions[i].submittedAnswers.find(
-      //   (answer) => answer.judge_id === judgeId && answer.isCompleted === fals
-      // );
-      console.log(notSubmitted, "submittedAnswer");
-
-      // If no answer is found for the current judge, set that as the current question
-      if (!notSubmitted) {
-        setCurrentQuestion(notSubmitted);
-        setCurrentQuestionIndex(i);
-        setLatestCurrentQuestionIndex(i);
-        break;
-      }
-    }
+    const currentQuestionIndexFind = questions?.findIndex(
+      (que) => que?._id === questionId
+    );
+    setCurrentQuestionIndex(currentQuestionIndexFind);
+    setCurrentQuestion(questions[currentQuestionIndexFind]);
   };
-
+  const judgeAnswer = currentQuestion?.submittedAnswers?.find(
+    (answer) => answer.judge_id === judge?.id
+  );
   const handleNext = async () => {
-    console.log(  questionData?.questions[currentQuestionIndex]?._id,
-      id,
-     new Date(),"afdsfa");
+    const notSubmited = currentQuestion?.submittedAnswers?.find(
+      (answer) => answer.isMain === false && answer?.isCompleted === false
+    );
+
+    if (notSubmited) {
+      alert("All judges not submitted");
+      return;
+    }
+
+    const isLastSubmit =
+      questionData?.questions?.length === currentQuestionIndex + 1;
     const data = await post("/judge/users/proceed-to-next-question", {
-      question_id: "670fdcb399bae2a31ac29c5b",
-      result_id:id,
+      question_id: questionData?.questions[currentQuestionIndex + 1]?._id,
+      result_id: id,
       startTime: new Date(),
+      answer_id: judgeAnswer?._id,
+      isLastSubmit,
     });
-    console.log(data, "data");
 
-    console.log(data?.success, "ssssd");
     if (data?.success) {
-      console.log(data?.result?._id, "result id");
-      console.log(data?._id, "result id");
-
       const resultId = data?._id ?? data?.result?._id;
-      console.log(resultId, "resultId");
-
-      socket.emit("proceed-question", {
-        success: true,
-        resultId:id,
-        zoneId:judge?.zoneId,
-      });
+      if (isLastSubmit) {
+        socket.emit("question-completed", {
+          success: true,
+          zoneId: judge?.zoneId,
+        });
+      } else {
+        socket.emit("proceed-question", {
+          success: true,
+          resultId: id,
+          zoneId: judge?.zoneId,
+          questionId: questionData?.questions[currentQuestionIndex + 1]?._id,
+        });
+      }
     }
   };
   return (
@@ -121,15 +114,15 @@ const QuestionsListPage = () => {
                 src="/images/homeLocation.png"
                 alt="location-img"
               />
-              {userData.place}
+              {judge?.zone}
             </h2>
-            <h2 className={styles.nameText}>{userData.name}</h2>
+            <h2 className={styles.nameText}>{questionData?.participant_name}</h2>
           </div>
         </div>
         <h1 className={styles.main_title}>Questions List</h1>
         <div className={styles.currentparticipant}>
           <QuestionsList
-            QuestionNumber={latestCurrentQuestionIndex + 1}
+            QuestionNumber={currentQuestionIndex + 1}
             Questions={questionData?.questions}
           />
         </div>
@@ -137,7 +130,14 @@ const QuestionsListPage = () => {
         <div className={styles.header}>
           <div className={styles.userDetailes}>
             {judge?.isMain && (
-              <NextButton onClick={handleNext} text={"Next"} />
+              <NextButton
+                onClick={handleNext}
+                text={
+                  questionData?.questions?.length === currentQuestionIndex + 1
+                    ? "submit"
+                    : "Next"
+                }
+              />
             )}
           </div>
         </div>

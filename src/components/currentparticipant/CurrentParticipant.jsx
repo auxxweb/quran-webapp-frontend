@@ -24,10 +24,11 @@ const CurrentParticipant = () => {
     socket = io(BASE_URL);
     socket.emit("join", judge?.zoneId);
 
-    socket.on("proceed-question", ({ success, resultId }) => {
+    socket.on("proceed-question", ({ success, resultId,questionId }) => {
       console.log(resultId, "resultId");
-      if (success && resultId) {
-        navigate("/judge/question-answer/" + resultId);
+      console.log(questionId, "questionId");
+      if (success && resultId && questionId) {
+        navigate("/judge/question-answer/" + resultId+"/"+questionId);
       }
     });
 
@@ -50,11 +51,13 @@ const CurrentParticipant = () => {
 
       const resultId = data?._id ?? data?.result?._id;
       console.log(resultId, "resultId");
+      console.log(data?.questionId, "data?.questionId");
 
       socket.emit("proceed-question", {
         success: true,
         resultId,
         zoneId:judge?.zoneId,
+        questionId:data?.questionId
       });
     }
   };

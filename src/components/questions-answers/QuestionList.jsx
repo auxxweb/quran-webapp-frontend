@@ -4,10 +4,10 @@ import QuestionCard from "./cards/QuestionCard";
 import CompletedCard from "./cards/CompletedCard";
 import NextCard from "./cards/NextCard";
 
-const QuestionsList = ({ QuestionNumber, Questions,setCurrentQuestion,setCurrentQuestionIndex }) => {
+const QuestionsList = ({ QuestionNumber, Questions,setCurrentQuestion,setLatestCurrentQuestionIndex }) => {
 console.log(Questions[0],"Questions");
 const changeTab = (index)=>{
-  setCurrentQuestionIndex(index)
+  setLatestCurrentQuestionIndex(index)
   setCurrentQuestion(Questions[index])
 }
   return (
