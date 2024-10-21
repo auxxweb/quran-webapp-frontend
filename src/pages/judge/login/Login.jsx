@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import styles from "./Login.module.css";
+import { PiEyeFill, PiEyeSlashFill } from "react-icons/pi";
+
 import GradientButton from "../../../components/buttons/gradientbutton/GradientButton";
 import { loginValiDate } from "../../../utils/validate";
-import {  useHttpRequests } from "../../../api/api";
+import { useHttpRequests } from "../../../api/api";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../redux/store";
 import { setJudge } from "../../../redux/features/judgeSlice";
 
 function Login() {
-  const dispatch =useAppDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { post } = useHttpRequests();
   const [loading, setLoading] = useState(false);
@@ -18,6 +20,7 @@ function Login() {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formError, setFormError] = useState({
     email_err: "Please enter a email",
@@ -41,7 +44,6 @@ function Login() {
     setSubmit(true);
     const validate = await loginValiDate(formData, setFormError, formError);
 
-
     if (validate) {
       const response = await post("/judge/auth/login/", formData);
       if (response?.success) {
@@ -57,8 +59,7 @@ function Login() {
           common_err: response.errors?.common ?? "",
         });
       }
-    }
-     else {
+    } else {
       setFormError({
         ...formError,
       });
@@ -103,14 +104,24 @@ function Login() {
                 )}
               </div>
               <div>
-                <input
-                  onChange={handleChange}
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
-                  className={styles.input}
-                />
+                <div className="relative">
+                  <input
+                    onChange={handleChange}
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    className={styles.input}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    class="absolute inset-y-0 end-0 text-xl  flex items-center  z-20 px-3  cursor-pointer text-black rounded-e-md   "
+                  >
+                    {showPassword ? <PiEyeSlashFill /> : <PiEyeFill />}
+                  </button>
+                </div>
+
                 {submit && (
                   <p className="text-center text-red-500 text-sm my-1">
                     {formError.password_err}
