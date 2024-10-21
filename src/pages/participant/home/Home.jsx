@@ -56,7 +56,7 @@ const Home = ({ zoneDetails }) => {
             alt="line"
           />
           <div className=" text-3xl md:text-4xl mt-10 font-[Amiri-Quran] text-center">
-            Welcom to {zoneDetails?.name} zone Quiz competition
+          Welcome to the {zoneDetails?.name} Zone Quiz Competition.
           </div>
         </div>
 
