@@ -5,7 +5,6 @@ import CompletedCard from "./cards/CompletedCard";
 import NextCard from "./cards/NextCard";
 
 const QuestionsList = ({ QuestionNumber, Questions,setCurrentQuestion,setLatestCurrentQuestionIndex }) => {
-console.log(Questions[0],"Questions");
 const changeTab = (index)=>{
   setLatestCurrentQuestionIndex(index)
   setCurrentQuestion(Questions[index])

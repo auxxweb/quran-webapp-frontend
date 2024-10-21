@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import styles from "./ParticipantNavBar.module.css";
 
-const ParticipantNavBar = ({ children }) => {
-  const [userData, setUserData] = useState({
-    name: "David Cooper",
-    place: "Calicut Zone",
-    profileImage:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  });
+const ParticipantNavBar = ({ children,data }) => {
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -17,16 +12,16 @@ const ParticipantNavBar = ({ children }) => {
             src="/images/homeLocation.png"
             alt="location-img"
           />
-          {userData.place}
+          {data?.zone?.name}
         </h2>
         <div className={styles.userDetailes}>
           <h2 className={styles.WelcomeText}>
             <img
               className={styles.profileImage}
-              src={userData.profileImage}
+              src={data?.participant?.image}
               alt="location-img"
             />
-            <span className={styles.nameText}>{userData.name}</span>
+            <span className={styles.nameText}>{data?.participant?.name}</span>
           </h2>
         </div>
       </div>

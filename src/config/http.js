@@ -31,7 +31,6 @@ const useHttp = () => {
         const { status } = error.response;
 
         if (status === 401) {
-          localStorage.clear();
           dispatch(clearJudge());
           if (judge?.token) {
             dispatch(clearJudge());

@@ -5,6 +5,8 @@ import { clearJudge } from "../redux/features/judgeSlice";
 
 const JudePrivateRoutes = () => {
   const { judge } = useAppSelector((state) => state.judge);
+  console.log(judge,"judge");
+  
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const parseJwt = (token) => {
@@ -15,7 +17,7 @@ const JudePrivateRoutes = () => {
     }
   };
   useEffect(() => {
-    if (judge?.token) {
+    if(judge?.token) {
       const decodedJwt = parseJwt(judge.token);
       if (decodedJwt.exp * 1000 < Date.now()) {
         console.log("token expired");
@@ -29,7 +31,7 @@ const JudePrivateRoutes = () => {
       }
     }
   }, [judge?.token, dispatch, navigate]);
-  return judge ? <Outlet /> : <Navigate to="/judge" />;
+  return judge ? <Outlet /> : <Navigate to="/judge/login" />;
 };
 
 export default JudePrivateRoutes;

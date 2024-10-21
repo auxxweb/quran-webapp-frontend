@@ -24,11 +24,9 @@ const CurrentParticipant = () => {
     socket = io(BASE_URL);
     socket.emit("join", judge?.zoneId);
 
-    socket.on("proceed-question", ({ success, resultId,questionId }) => {
-      console.log(resultId, "resultId");
-      console.log(questionId, "questionId");
+    socket.on("proceed-question", ({ success, resultId, questionId }) => {
       if (success && resultId && questionId) {
-        navigate("/judge/question-answer/" + resultId+"/"+questionId);
+        navigate("/judge/question-answer/" + resultId + "/" + questionId);
       }
     });
 
@@ -42,22 +40,15 @@ const CurrentParticipant = () => {
       participant_id: id,
       startTime: new Date(),
     });
-    console.log(data, "data");
 
-    console.log(data?.success, "ssssd");
     if (data?.success) {
-      console.log(data?.result?._id, "result id");
-      console.log(data?._id, "result id");
-
       const resultId = data?._id ?? data?.result?._id;
-      console.log(resultId, "resultId");
-      console.log(data?.questionId, "data?.questionId");
 
       socket.emit("proceed-question", {
         success: true,
         resultId,
-        zoneId:judge?.zoneId,
-        questionId:data?.questionId
+        zoneId: judge?.zoneId,
+        questionId: data?.questionId,
       });
     }
   };
@@ -66,12 +57,12 @@ const CurrentParticipant = () => {
     <div className={styles.card}>
       <div className={styles.card_header}>
         <div className={styles.card_welcome_title_div}>
-          <h1 className={styles.card_title}>Current participant</h1>
+          <h1 className={styles.card_title}>Current participandt</h1>
         </div>
 
         <div className={styles.image_div}>
           <img
-            src={userData?.profileImage ?? "/images/profileImage.jpg"}
+            src={userData?.image ?? "/images/profileImage.jpg"}
             className={styles.user_image}
             alt=""
           />

@@ -22,7 +22,6 @@ function Login() {
   const [formError, setFormError] = useState({
     email_err: "Please enter a email",
     password_err: "Please enter a  password s",
-    remember_err: "",
     common_err: "",
   });
 
@@ -43,7 +42,7 @@ function Login() {
     const validate = await loginValiDate(formData, setFormError, formError);
 
 
-    if (remember && validate) {
+    if (validate) {
       const response = await post("/judge/auth/login/", formData);
       if (response?.success) {
         localStorage.setItem("access_token", response?.data?.token);
@@ -58,10 +57,10 @@ function Login() {
           common_err: response.errors?.common ?? "",
         });
       }
-    } else {
+    }
+     else {
       setFormError({
         ...formError,
-        remember_err: "Please check the box.'",
       });
     }
   };
@@ -139,7 +138,7 @@ function Login() {
                   </div>
                   {remember === false && (
                     <p className="text-end text-red-500 text-sm ">
-                      {formError.remember_err}
+                      {formError?.remember_err}
                     </p>
                   )}
                 </div>

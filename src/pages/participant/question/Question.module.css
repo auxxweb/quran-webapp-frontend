@@ -1,10 +1,10 @@
 .section {
   background-image: url("/public/images/bg-2.png");
-  @apply bg-cover bg-center h-screen w-full;
+  @apply bg-cover bg-center h-screen w-full flex justify-center ;
 }
 
 .main_div {
-  @apply flex justify-self-center items-center;
+  @apply flex justify-self-center items-center  ;
 }
 
 .question_div {

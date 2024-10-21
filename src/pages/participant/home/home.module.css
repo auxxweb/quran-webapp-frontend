@@ -1,82 +1,52 @@
 .section {
-    background-image: url("/public/images/backgroundimage.png");
-    @apply bg-cover bg-center min-h-screen h-full ;
-  }
-  
-  .container {
-    @apply  mx-5 pt-5 md:mx-28 md:pt-10  ;
-  }
-  
-  .header {
-    @apply flex justify-between;
-  }
-  
-  .WelcomeText {
-    @apply flex 
-    font-[Amiri-Quran] 
-    text-2xl font-normal 
-    leading-[24px]
-     tracking-[0.38px] 
-     text-left items-center gap-4;
-  }
-  
-  .nameText {
-    @apply mt-3
-     ml-10
-    font-[Amiri-Quran] 
-     text-[36px] 
-     font-normal 
-     leading-[24px];
-  }
-  
-  .locationImage {
-    @apply h-5 md:h-10;
-  }
+  background-image: url("/public/images/backgroundimage.png");
+  @apply bg-cover bg-center h-screen flex flex-col;
+}
 
+.container {
+  @apply mx-5 pt-5 md:mx-28 md:pt-10 h-full;
+  display: flex;
+  flex-direction: column;
+}
 
-  .logo_image {
-    @apply h-10 md:h-16;
-  }
-  .currentparticipant{
-    @apply flex justify-center 
-  }
-  
+.header {
+  @apply flex justify-between;
+  flex-shrink: 0; /* Header takes only its content height */
+}
 
-  
+.WelcomeText {
+  @apply flex font-[Amiri-Quran] text-2xl font-normal leading-[24px] tracking-[0.38px] text-left items-center gap-4;
+}
 
-.card {
-    box-shadow: -10px 10px 15px rgba(0, 0, 0, 0.5);
-    @apply bg-white rounded-3xl w-full lg:w-[30%]  mt-10 md:mt-10 sm:max-w-md xl:p-0 border-[2px] border-gray-500 border-opacity-65;
-  }
-  
-  .card_header {
-    @apply p-6 space-y-10 md:space-y-14  sm:p-8;
-  }
-  
-  .card_name {
-    @apply text-xl text-center  leading-tight tracking-tight text-secondary md:text-[36px] font-semibold;
-  }
-  
-  .card_title {
-    @apply text-xl text-center  leading-tight tracking-tight text-gray-900 md:text-[24px] font-semibold;
-  }
-  
+.nameText {
+  @apply mt-3 ml-10 font-[Amiri-Quran] text-[36px] font-normal leading-[24px];
+}
 
-  
-  .card_descrption {
-    @apply text-sm  leading-tight tracking-tight text-gray-900 md:text-[16px] font-medium;
-  }
-  
-  
-  
-  .card_welcome_title_div{
-    @apply flex justify-center
-  }
-  
-  .image_div{ 
-     @apply flex justify-center
-  }
-  
-  .user_image{
-    @apply rounded-full w-[180px] h-[180px]
-  }
+.locationImage {
+  @apply h-5 md:h-10;
+}
+
+.logo_image {
+  @apply h-10 md:h-16;
+}
+
+.currentparticipant {
+  @apply flex flex-col pt-10 p-5 items-center ;
+  flex-grow: 1; /* Fills remaining space */
+}
+.line {
+  @apply w-[35%];
+}
+.arabic_text {
+  @apply font-inter text-secondary lg:text-[24px]  text-2xl font-normal leading-none tracking-widest text-center;
+}
+.award_text {
+  @apply font-inter text-secondary py-3 text-base font-normal leading-6 tracking-wide text-center;
+}
+.logo {
+  @apply flex items-center  text-2xl font-semibold text-gray-900;
+}
+
+.logo img {
+  @apply w-[150px] h-[100px] mr-2;
+}

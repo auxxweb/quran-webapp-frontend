@@ -1,28 +1,10 @@
 import React from "react";
 import styles from "./home.module.css";
-import { useNavigate } from "react-router-dom";
 
-const Home = ({ zoneDetails }) => {
-
-
+const Home = () => {
   return (
     <div className={styles.section}>
       <div className={styles.container}>
-        <div className={styles.header}>
-          <h2 className={styles.WelcomeText}>
-            <img
-              className={styles.logo_image}
-              src="/images/logo.png"
-              alt="location-img"
-            />
-            <img
-              className={styles.locationImage}
-              src="/images/homeLocation.png"
-              alt="location-img"
-            />
-            {zoneDetails?.name}
-          </h2>
-        </div>
         <div className={styles.currentparticipant}>
           <a href="#" className={styles.logo}>
             <img className="w-8 h-8 mr-2" src="/images/logo.png" alt="logo" />
@@ -34,11 +16,7 @@ const Home = ({ zoneDetails }) => {
             src="/images/login-page-line.png"
             alt="line"
           />
-          <div className=" text-3xl md:text-4xl mt-10 font-[Amiri-Quran] text-center">
-            Welcom to {zoneDetails?.name} zone Quiz competition
-          </div>
         </div>
-
       </div>
     </div>
   );
