@@ -5,6 +5,7 @@ import { io } from "socket.io-client";
 import { BASE_URL } from "../../../utils/constant";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../redux/store";
+import { Bounce, toast } from "react-toastify";
 var socket;
 const UserCard = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,11 +29,27 @@ const UserCard = ({ user }) => {
     };
   }, []);
   const handleSelectClick = () => {
+    if(user?.hasParticipated){
+      toast.error("This participant already participated this competition", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }else{
     socket.emit("selected-participant", {
       success: true,
       userId: user?._id,
       zoneId: judge?.zoneId,
     });
+    }
+    
+
   };
   return (
     <div className={styles.mainContainer}>
