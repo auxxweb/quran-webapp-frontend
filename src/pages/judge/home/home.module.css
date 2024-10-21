@@ -26,11 +26,11 @@
 }
 
 .nameText {
-  @apply mt-3
-   ml-10
+  @apply
+   
    max-430:ml-0
   font-[Amiri-Quran] 
-   text-[36px] 
+   text-[30px] 
    max-430:text-center
    font-normal 
    leading-[24px];

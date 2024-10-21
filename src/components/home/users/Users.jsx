@@ -64,7 +64,7 @@ const Users = () => {
     <>
       <div className={styles.mainContainer}>
         <div className={styles.headContainer}>
-          <h1 className={styles.headText}>Participants</h1>
+          <h1 className={styles.headText}>Select Participant</h1>
           <SearchInput onSearchInputChange={handleSearchInputChange} />
         </div>
         <div className={styles.userContainer}>

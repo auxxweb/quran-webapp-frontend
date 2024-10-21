@@ -18,7 +18,7 @@ const Question = () => {
       try {
         setLoading(true);
         const data = await getQuestionDetailsHandler(resultId, questionId);
-        setQuestionData(data.result);
+        setQuestionData(data?.result);
         setTimeout(() => {
           setLoading(false);
         }, 2000);

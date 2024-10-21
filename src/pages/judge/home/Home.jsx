@@ -57,7 +57,7 @@ const Home = () => {
     <div className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.WelcomeText}>Welcome</h2>
+          <h2 className={styles.WelcomeText}>Welcome<span className={styles?.nameText}>{judge?.name}</span></h2>
           <h2 className={styles.WelcomeText}>
             <img
               className={styles.locationImage}
@@ -67,7 +67,7 @@ const Home = () => {
             {judge?.zone}
           </h2>
         </div>
-        <h1 className={styles?.nameText}>{judge?.name}</h1>
+        {/* <h1 className={styles?.nameText}>{judge?.name}</h1> */}
         <Users />
       </div>
     </div>

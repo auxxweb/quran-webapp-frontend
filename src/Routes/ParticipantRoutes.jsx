@@ -15,6 +15,9 @@ const ParticipantRoutes = () => {
   const [loading, setLoading] = useState(true);
   const [zoneDetails, setZoneDetails] = useState(null);
 
+  console.log(location.pathname,"pathName");
+  
+
   const zoneId = location.pathname.split("/")[2]; // Extract zoneId
 
   useEffect(() => {
