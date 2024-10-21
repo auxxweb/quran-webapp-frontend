@@ -15,14 +15,13 @@ const ParticipantRoutes = () => {
   const [loading, setLoading] = useState(true);
   const [zoneDetails, setZoneDetails] = useState(null);
 
-  console.log(location.pathname,"pathName");
   
 
-  const zoneId = location.pathname.split("/")[2]; // Extract zoneId
+  const zoneId = location.pathname.split("/")[2]; 
 
   useEffect(() => {
     if (!zoneId) {
-      navigate("/"); // Redirect if no zoneId
+      navigate("/"); 
       return;
     }
     getZoneDetails();
@@ -79,7 +78,6 @@ const ParticipantRoutes = () => {
       }
     });
     socket.on("proceed-question", ({ success, resultId,questionId }) => {
-      console.log(resultId, "resultId");
       if (success && resultId&& questionId) {
         navigate(`/participant/${zoneDetails?._id}/question/${resultId}/${questionId}`);
       }

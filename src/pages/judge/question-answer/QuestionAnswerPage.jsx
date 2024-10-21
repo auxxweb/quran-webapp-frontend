@@ -7,6 +7,7 @@ import NextButton from "../../../components/buttons/next-button/NextButton";
 import { useAppSelector } from "../../../redux/store";
 import { useHttpRequests } from "../../../api/api";
 import { useNavigate, useParams } from "react-router-dom";
+import { Bounce, toast } from "react-toastify";
 
 function QuestionAnswerPage() {
   const { judge } = useAppSelector((state) => state.judge);
@@ -49,9 +50,29 @@ function QuestionAnswerPage() {
   const handleSubmit = async () => {
     if (!judge?.isMain && !judgeAnswer?.isCompleted) {
       if (!updateData?.answer) {
-        alert("Please enter answer ");
+        toast.error("Please enter answer ", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       } else if (!updateData?.mark) {
-        alert("Please enter mark ");
+        toast.error("Please enter Score", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       } else {
 
         const data = await post("/judge/users/submit-answers", {
@@ -64,8 +85,17 @@ function QuestionAnswerPage() {
         });
         if (data?.success) {
           navigate(`/judge/questions-list/${id}/${questionId}`);
-
-          alert("submitted");
+          toast.success("Submitted successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
         }
       }
     } else {

@@ -13,10 +13,8 @@ const Home = ({ zoneDetails }) => {
   }, [])
 
   const featchResultDetails = async () => {
-    console.log(zoneDetails?._id, 'zoneID')
 
     const data = await get(`/judge/participant/questions/zone/${zoneDetails?._id}`)
-    console.log(data, 'data-------')
     if (data && data?.data?.length > 0) {
       navigate(
        `/participant/${zoneDetails?._id}/question/${data?.data[0]?._id}/${data?.data[0]?.currentQuestion

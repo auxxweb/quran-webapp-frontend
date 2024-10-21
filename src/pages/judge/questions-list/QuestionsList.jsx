@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useHttpRequests } from "../../../api/api";
 import { io } from "socket.io-client";
 import { BASE_URL } from "../../../utils/constant";
+import { Bounce, toast } from "react-toastify";
 var socket;
 const QuestionsListPage = () => {
   const [userData, setUserData] = useState({
@@ -72,7 +73,17 @@ const QuestionsListPage = () => {
     );
 
     if (notSubmited) {
-      alert("All judges not submitted");
+      toast.success("All judges not submitted answer and score", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       return;
     }
 
