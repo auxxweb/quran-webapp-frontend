@@ -189,7 +189,8 @@ function QuestionAnswerPage() {
                   disabled={judgeAnswer?.isCompleted}
                   onChange={(e) => handleChange(e.target.value, "mark")}
                   min={0}
-                  className={`bg-transparent w-28 px-2 py-1 text-center text-[#0B9D64] text-3xl`}
+                  placeholder="Enter"
+                  className={`border border-green-500 rounded-lg bg-transparent w-28 px-2 py-1 text-center text-[#0B9D64] text-2xl`}
                 />
               </div>
             </div>
