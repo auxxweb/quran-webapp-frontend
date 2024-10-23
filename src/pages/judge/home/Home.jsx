@@ -24,13 +24,22 @@ const Home = () => {
 
     const data = await get(`/judge/users/questions/zone/${judge?.zoneId}`)
     console.log(data, 'data-------')
-    if (data && data?.data?.length > 0) {
-      navigate(
-        '/judge/question-answer/' +
-          data?.data[0]?._id +
-          '/' +
-          data?.data[0]?.currentQuestion,
-      )
+    if (data && data?.data?.length > 0 ) {
+      if(data?.data[0]?.answers?.length > 0){
+        navigate(
+          '/judge/question-answer/' +
+            data?.data[0]?._id +
+            '/' +
+            data?.data[0]?.currentQuestion,
+        )
+      }else{
+        navigate(
+          '/judge/questions-list/' +
+            data?.data[0]?._id +
+            '/' +
+            data?.data[0]?.currentQuestion,
+        )
+      }
     }
   }
 
