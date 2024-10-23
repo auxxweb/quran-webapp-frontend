@@ -10,10 +10,6 @@ import { BASE_URL } from "../../../utils/constant";
 import { Bounce, toast } from "react-toastify";
 var socket;
 const QuestionsListPage = () => {
-  const [userData, setUserData] = useState({
-    name: "Adarsh Raj",
-    place: "Calicut Zone",
-  });
   const { judge } = useAppSelector((state) => state.judge);
   const [questionData, setQuestionData] = useState({
     questions: [],
@@ -68,29 +64,13 @@ const QuestionsListPage = () => {
     (answer) => answer.judge_id === judge?.id
   );
   const handleNext = async () => {
-    const notSubmited = currentQuestion?.submittedAnswers?.find(
-      (answer) => answer.isMain === false && answer?.isCompleted === false
-    );
 
-    if (notSubmited) {
-      toast.success("All judges not submitted answer and score", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-      return;
-    }
 
     const isLastSubmit =
       questionData?.questions?.length === currentQuestionIndex + 1;
     const data = await post("/judge/users/proceed-to-next-question", {
       question_id: questionData?.questions[currentQuestionIndex + 1]?._id,
+      old_question_id: questionData?.questions[currentQuestionIndex]?._id,
       result_id: id,
       startTime: new Date(),
       answer_id: judgeAnswer?._id,
@@ -112,6 +92,19 @@ const QuestionsListPage = () => {
           questionId: questionData?.questions[currentQuestionIndex + 1]?._id,
         });
       }
+    } else {
+      toast.error(data?.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      return;
     }
   };
   return (
@@ -127,7 +120,9 @@ const QuestionsListPage = () => {
               />
               {judge?.zone}
             </h2>
-            <h2 className={styles.nameText}>{questionData?.participant_name}</h2>
+            <h2 className={styles.nameText}>
+              {questionData?.participant_name}
+            </h2>
           </div>
         </div>
         <h1 className={styles.main_title}>Questions List</h1>
