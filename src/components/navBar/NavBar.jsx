@@ -28,7 +28,7 @@ const NavBar = () => {
         <div className={styles.userProfileContainer}>
           <img
             className={styles.userProfileImage}
-            src={judge?.image}
+            src={judge?.image ?? "/images/profileImage.jpg"}
             alt="User-Profile"
           />
           <div>
