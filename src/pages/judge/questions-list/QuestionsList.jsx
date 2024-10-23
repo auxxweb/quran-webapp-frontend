@@ -48,6 +48,7 @@ const QuestionsListPage = () => {
 
   const fetchQuestionAndAnswer = async () => {
     const data = await get(`/judge/users/questions/${id}`);
+    
 
     setQuestionData(data?.data);
     findNextUnansweredQuestion(data?.data?.questions);
