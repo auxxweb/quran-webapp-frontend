@@ -18,7 +18,7 @@ const ParticipantNavBar = ({ children,data }) => {
           <h2 className={styles.WelcomeText}>
             <img
               className={styles.profileImage}
-              src={data?.participant?.image}
+              src={data?.participant?.image ?? "/images/profileImage.jpg"}
               alt="location-img"
             />
             <span className={styles.nameText}>{data?.participant?.name}</span>
