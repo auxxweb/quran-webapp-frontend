@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Outlet, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "../pages/participant/home/Home";
 import Question from "../pages/participant/question/Question";
@@ -19,18 +19,28 @@ const ParticipantRoutes = () => {
 
   const zoneId = location.pathname.split("/")[2]; 
 
+  const effectRan = useRef(false); // Ref to track if the effect has run
+
   useEffect(() => {
     if (!zoneId) {
       navigate("/"); 
       return;
     }
-    getZoneDetails();
+
+    // Avoid running effect twice in strict mode
+    if (!effectRan.current) {
+      getZoneDetails();
+      effectRan.current = true; // Set it to true after the first run
+    }
   }, [zoneId]);
 
   const getZoneDetails = async () => {
     try {
       const data = await getZoneDetailsHandler(zoneId);
+      console.log(data,"data-apple");
+      
       if (data?.success) {
+        alert("calling")
         setZoneDetails(data?.zone);
         toast.success(data?.message, {
           position: "top-right",
