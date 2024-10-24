@@ -15,6 +15,7 @@ const QuestionsListPage = () => {
     questions: [],
   });
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const { get, post } = useHttpRequests();
@@ -40,7 +41,7 @@ const QuestionsListPage = () => {
       socket.off("proceed-question");
       socket.off("question-completed");
     };
-  }, []);
+  }, [judge?.zoneId,navigate]);
 
   useEffect(() => {
     fetchQuestionAndAnswer();
@@ -65,8 +66,7 @@ const QuestionsListPage = () => {
     (answer) => answer.judge_id === judge?.id
   );
   const handleNext = async () => {
-
-
+    setLoading(true)
     const isLastSubmit =
       questionData?.questions?.length === currentQuestionIndex + 1;
     const data = await post("/judge/users/proceed-to-next-question", {
@@ -91,7 +91,10 @@ const QuestionsListPage = () => {
           zoneId: judge?.zoneId,
           questionId: questionData?.questions[currentQuestionIndex + 1]?._id,
         });
+
+        
       }
+      setLoading(false)
     } else {
       toast.error(data?.message, {
         position: "top-right",
@@ -104,6 +107,7 @@ const QuestionsListPage = () => {
         theme: "light",
         transition: Bounce,
       });
+      setLoading(false)
       return;
     }
   };
@@ -138,6 +142,7 @@ const QuestionsListPage = () => {
             {judge?.isMain && (
               <NextButton
                 onClick={handleNext}
+                desable={loading}
                 text={
                   questionData?.questions?.length === currentQuestionIndex + 1
                     ? "submit"
