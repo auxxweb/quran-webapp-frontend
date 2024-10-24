@@ -31,6 +31,8 @@ function QuestionAnswerPage() {
 
   const fetchQuestionAndAnswer = async () => {
     const data = await get(`/judge/users/questions/${id}`)
+    console.log(data?.data,"dataaaa---daaa");
+    
 
     setQuestionData(data?.data)
     findNextUnansweredQuestion(data?.data?.questions)
@@ -103,9 +105,12 @@ function QuestionAnswerPage() {
   }
 
   const handleChange = (value, field) => {
-    if (field === 'mark' && value <= 100) {
+    if (field == 'mark' && value <= 100) {
       setUpdateData((prev) => ({ ...prev, [field]: value }))
-    } else {
+    } else if(field=="answer") {
+      setUpdateData((prev) => ({ ...prev, [field]: value }))
+     
+    }else{
       toast.warning('Maximun score 100', {
         position: 'top-right',
         autoClose: 5000,
