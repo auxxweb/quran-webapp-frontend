@@ -37,10 +37,8 @@ const ParticipantRoutes = () => {
   const getZoneDetails = async () => {
     try {
       const data = await getZoneDetailsHandler(zoneId);
-      console.log(data,"data-apple");
       
       if (data?.success) {
-        alert("calling")
         setZoneDetails(data?.zone);
         toast.success(data?.message, {
           position: "top-right",
