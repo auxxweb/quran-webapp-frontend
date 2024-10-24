@@ -20,10 +20,8 @@ const Home = () => {
   }, [])
 
   const featchResultDetails = async () => {
-    console.log(judge?.zoneId, 'zoneID')
 
     const data = await get(`/judge/users/questions/zone/${judge?.zoneId}`)
-    console.log(data, 'data-------')
     if (data && data?.data?.length > 0 ) {
       if(data?.data[0]?.answers?.length > 0){
         navigate(
@@ -44,14 +42,11 @@ const Home = () => {
   }
 
   useEffect(() => {
-    console.log('hello how are o', BASE_URL)
 
     socket = io(BASE_URL)
     socket.emit('join', judge?.zoneId)
 
     socket.on('proceed-question', ({ success, resultId, questionId }) => {
-      console.log(resultId, 'resultId')
-      console.log(questionId, 'questionId')
       if (success && resultId && questionId) {
         navigate('/judge/question-answer/' + resultId + '/' + questionId)
       }

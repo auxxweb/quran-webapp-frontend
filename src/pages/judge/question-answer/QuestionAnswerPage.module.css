@@ -1,6 +1,8 @@
+
 .section {
   background-image: url("/public/images/bg-2.png");
-  @apply bg-cover bg-center w-full;
+  @apply bg-repeat-y bg-center min-h-full pt-5 w-full;
+  background-size: 100% auto; /* Ensure horizontal cover and vertical repeat */
 }
 
 .container {

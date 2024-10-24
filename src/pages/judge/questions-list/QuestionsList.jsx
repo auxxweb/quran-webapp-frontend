@@ -79,7 +79,6 @@ const QuestionsListPage = () => {
     });
 
     if (data?.success) {
-      const resultId = data?._id ?? data?.result?._id;
       if (isLastSubmit) {
         socket.emit("question-completed", {
           success: true,

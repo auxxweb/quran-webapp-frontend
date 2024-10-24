@@ -140,7 +140,6 @@ function Login() {
                       name="remember"
                       onChange={() => {
                         setRemember(!remember);
-                        console.log(remember);
                       }}
                     />
                   </div>

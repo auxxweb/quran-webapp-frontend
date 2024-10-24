@@ -31,7 +31,6 @@ function QuestionAnswerPage() {
 
   const fetchQuestionAndAnswer = async () => {
     const data = await get(`/judge/users/questions/${id}`)
-    console.log(data?.data,"dataaaa---daaa");
     
 
     setQuestionData(data?.data)
@@ -145,7 +144,7 @@ function QuestionAnswerPage() {
             <h2 className={styles.WelcomeText}>
               <img
                 className={styles.profileImage}
-                src={questionData?.participant_image}
+                src={questionData?.participant_image ?? "/images/profileImage.jpg"}
                 alt="location-img"
               />
               <span className={styles.nameText}>

@@ -5,7 +5,6 @@ import { clearJudge } from "../redux/features/judgeSlice";
 
 const JudePrivateRoutes = () => {
   const { judge } = useAppSelector((state) => state.judge);
-  console.log(judge,"judge");
   
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
