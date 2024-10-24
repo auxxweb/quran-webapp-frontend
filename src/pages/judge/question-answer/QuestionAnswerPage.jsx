@@ -1,111 +1,124 @@
-import React, { useEffect, useState } from "react";
-import styles from "./QuestionAnswerPage.module.css";
-import QuestionsList from "../../../components/questions-answers/QuestionList";
-import QuestionAnswerCard from "../../../components/questionanswercard/QuestionAnswerCard";
-import CircularTimer from "../../../components/timer/Timer";
-import NextButton from "../../../components/buttons/next-button/NextButton";
-import { useAppSelector } from "../../../redux/store";
-import { useHttpRequests } from "../../../api/api";
-import { useNavigate, useParams } from "react-router-dom";
-import { Bounce, toast } from "react-toastify";
+import React, { useEffect, useState } from 'react'
+import styles from './QuestionAnswerPage.module.css'
+import QuestionsList from '../../../components/questions-answers/QuestionList'
+import QuestionAnswerCard from '../../../components/questionanswercard/QuestionAnswerCard'
+import CircularTimer from '../../../components/timer/Timer'
+import NextButton from '../../../components/buttons/next-button/NextButton'
+import { useAppSelector } from '../../../redux/store'
+import { useHttpRequests } from '../../../api/api'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Bounce, toast } from 'react-toastify'
 
 function QuestionAnswerPage() {
-  const { judge } = useAppSelector((state) => state.judge);
+  const { judge } = useAppSelector((state) => state.judge)
   const [questionData, setQuestionData] = useState({
     questions: [],
-  });
-  const [updateData, setUpdateData] = useState({ answer: "", mark: "" });
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [latestCurrentQuestionIndex, setLatestCurrentQuestionIndex] =
-    useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const { get, post } = useHttpRequests();
-  const { id, questionId } = useParams();
+  })
+  const [updateData, setUpdateData] = useState({ answer: '', mark: '' })
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [latestCurrentQuestionIndex, setLatestCurrentQuestionIndex] = useState(
+    0,
+  )
+  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const { get, post } = useHttpRequests()
+  const { id, questionId } = useParams()
 
-  const navigate = useNavigate();
-
+  const navigate = useNavigate()
 
   useEffect(() => {
-    fetchQuestionAndAnswer();
-  }, []);
+    fetchQuestionAndAnswer()
+  }, [])
 
   const fetchQuestionAndAnswer = async () => {
-    const data = await get(`/judge/users/questions/${id}`);
+    const data = await get(`/judge/users/questions/${id}`)
 
-    setQuestionData(data?.data);
-    findNextUnansweredQuestion(data?.data?.questions);
-  };
+    setQuestionData(data?.data)
+    findNextUnansweredQuestion(data?.data?.questions)
+  }
 
   const findNextUnansweredQuestion = (questions) => {
     const currentQuestionIndexFind = questions?.findIndex(
-      (que) => que?._id === questionId
-    );
-    setCurrentQuestionIndex(currentQuestionIndexFind);
-    setLatestCurrentQuestionIndex(currentQuestionIndexFind);
-    setCurrentQuestion(questions[currentQuestionIndexFind]);
-  };
+      (que) => que?._id === questionId,
+    )
+    setCurrentQuestionIndex(currentQuestionIndexFind)
+    setLatestCurrentQuestionIndex(currentQuestionIndexFind)
+    setCurrentQuestion(questions[currentQuestionIndexFind])
+  }
   const judgeAnswer = currentQuestion?.submittedAnswers?.find(
-    (answer) => answer.judge_id === judge?.id
-  );
+    (answer) => answer.judge_id === judge?.id,
+  )
   const handleSubmit = async () => {
     if (!judge?.isMain && !judgeAnswer?.isCompleted) {
       if (!updateData?.answer) {
-        toast.error("Please enter answer ", {
-          position: "top-right",
+        toast.error('Please enter answer ', {
+          position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light",
+          theme: 'light',
           transition: Bounce,
-        });
+        })
       } else if (!updateData?.mark) {
-        toast.error("Please enter Score", {
-          position: "top-right",
+        toast.error('Please enter Score', {
+          position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light",
+          theme: 'light',
           transition: Bounce,
-        });
+        })
       } else {
-
-        const data = await post("/judge/users/submit-answers", {
+        const data = await post('/judge/users/submit-answers', {
           answer_id: judgeAnswer?._id,
           result_id: id,
           question_id: questionId,
           answer: updateData?.answer,
           score: updateData?.mark,
           endTime: new Date(),
-        });
+        })
         if (data?.success) {
-          navigate(`/judge/questions-list/${id}/${questionId}`);
-          toast.success("Submitted successfully", {
-            position: "top-right",
+          navigate(`/judge/questions-list/${id}/${questionId}`)
+          toast.success('Submitted successfully', {
+            position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "light",
+            theme: 'light',
             transition: Bounce,
-          });
+          })
         }
       }
     } else {
-      navigate(`/judge/questions-list/${id}/${questionId}`);
+      navigate(`/judge/questions-list/${id}/${questionId}`)
     }
-  };
+  }
 
   const handleChange = (value, field) => {
-    setUpdateData((prev) => ({ ...prev, [field]: value }));
-  };
+    if (field === 'mark' && value <= 100) {
+      setUpdateData((prev) => ({ ...prev, [field]: value }))
+    } else {
+      toast.warning('Maximun score 100', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        transition: Bounce,
+      })
+    }
+  }
 
   return (
     <div className={styles.section}>
@@ -130,7 +143,9 @@ function QuestionAnswerPage() {
                 src={questionData?.participant_image}
                 alt="location-img"
               />
-              <span className={styles.nameText}>{questionData?.participant_name}</span>
+              <span className={styles.nameText}>
+                {questionData?.participant_name}
+              </span>
             </h2>
           </div>
         </div>
@@ -148,12 +163,12 @@ function QuestionAnswerPage() {
           <div className={styles.question_main}>
             <QuestionAnswerCard
               titile={`Question ${latestCurrentQuestionIndex + 1}`}
-              border={"#C19D5C"}
+              border={'#C19D5C'}
               descrption={currentQuestion?.question}
             />
             <QuestionAnswerCard
-              titile={"Answer"}
-              border={"#0B9D64"}
+              titile={'Answer'}
+              border={'#0B9D64'}
               descrption={currentQuestion?.answer}
             />
             {!judge?.isMain && (
@@ -167,7 +182,7 @@ function QuestionAnswerPage() {
                     ? judgeAnswer?.answer
                     : updateData?.answer
                 }
-                onChange={(e) => handleChange(e.target.value, "answer")}
+                onChange={(e) => handleChange(e.target.value, 'answer')}
                 className={styles.main_section}
                 placeholder="Participant’s Answer"
               />
@@ -178,7 +193,7 @@ function QuestionAnswerPage() {
           {!judge?.isMain && (
             <div className={styles.score_div}>
               <div className="max-w-max  flex items-center space-x-5">
-                <span>Score</span>{" "}
+                <span>Score</span>{' '}
                 <input
                   type="number"
                   value={
@@ -187,7 +202,7 @@ function QuestionAnswerPage() {
                       : updateData?.mark
                   }
                   disabled={judgeAnswer?.isCompleted}
-                  onChange={(e) => handleChange(e.target.value, "mark")}
+                  onChange={(e) => handleChange(e.target.value, 'mark')}
                   min={0}
                   placeholder="Enter"
                   className={`border border-green-500 rounded-lg bg-transparent w-28 px-2 py-1 text-center text-[#0B9D64] text-2xl`}
@@ -199,7 +214,7 @@ function QuestionAnswerPage() {
             <button onClick={handleSubmit}>
               <NextButton
                 text={
-                  judge?.isMain || judgeAnswer?.isCompleted ? "Next" : "Submit"
+                  judge?.isMain || judgeAnswer?.isCompleted ? 'Next' : 'Submit'
                 }
               />
             </button>
@@ -207,7 +222,7 @@ function QuestionAnswerPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default QuestionAnswerPage;
+export default QuestionAnswerPage
