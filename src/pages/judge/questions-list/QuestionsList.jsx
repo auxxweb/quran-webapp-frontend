@@ -45,7 +45,7 @@ const QuestionsListPage = () => {
 
   useEffect(() => {
     fetchQuestionAndAnswer();
-  }, []);
+  }, [id, questionId]);
 
   const fetchQuestionAndAnswer = async () => {
     const data = await get(`/judge/users/questions/${id}`);
@@ -66,18 +66,29 @@ const QuestionsListPage = () => {
     (answer) => answer.judge_id === judge?.id
   );
   const handleNext = async () => {
-    setLoading(true)
-    const isLastSubmit =
-      questionData?.questions?.length === currentQuestionIndex + 1;
+    setLoading(true);
+  
+    const currentQuestionId = questionData?.questions[currentQuestionIndex]?._id;
+  
+    const currentIndex = questionData?.questions?.findIndex(
+      (question) => question?._id === questionId
+    );
+  
+    const nextQuestion = questionData?.questions?.find(
+      (question, index) => index > currentIndex && !question.submittedAnswers?.some(answer => answer.judge_id === judge?.id)
+    );
+  
+    const isLastSubmit = !nextQuestion; 
+  
     const data = await post("/judge/users/proceed-to-next-question", {
-      question_id: questionData?.questions[currentQuestionIndex + 1]?._id,
-      old_question_id: questionData?.questions[currentQuestionIndex]?._id,
+      question_id: nextQuestion?._id,
+      old_question_id: questionId,
       result_id: id,
       startTime: new Date(),
       answer_id: judgeAnswer?._id,
       isLastSubmit,
     });
-
+  
     if (data?.success) {
       if (isLastSubmit) {
         socket.emit("question-completed", {
@@ -89,12 +100,13 @@ const QuestionsListPage = () => {
           success: true,
           resultId: id,
           zoneId: judge?.zoneId,
-          questionId: questionData?.questions[currentQuestionIndex + 1]?._id,
+          questionId: nextQuestion?._id, // Use the next question's ID
         });
-
-        
+  
+        setCurrentQuestionIndex(questionData?.questions?.findIndex(
+          (question) => question._id === nextQuestion?._id
+        ));
       }
-      setLoading(false)
     } else {
       toast.error(data?.message, {
         position: "top-right",
@@ -107,10 +119,11 @@ const QuestionsListPage = () => {
         theme: "light",
         transition: Bounce,
       });
-      setLoading(false)
-      return;
     }
+  
+    setLoading(false);
   };
+  
   return (
     <div className={styles.section}>
       <div className={styles.container}>
