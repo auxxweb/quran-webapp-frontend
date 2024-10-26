@@ -2,6 +2,7 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constant";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { clearJudge } from "../redux/features/judgeSlice";
+import { Bounce, toast } from "react-toastify";
 
 const baseURL = `${BASE_URL}/api`;
 
@@ -11,11 +12,11 @@ const useHttp = () => {
 
   const instance = axios.create({
     baseURL,
-    withCredentials: true,
+    withCredentials: true
   });
 
   instance.interceptors.request.use(async (request) => {
-    const token = judge?.token; 
+    const token = judge?.token;
     if (token) {
       request.headers.Authorization = `Bearer ${token}`;
     }
@@ -28,10 +29,22 @@ const useHttp = () => {
     },
     async (error) => {
       if (error.response) {
-        const { status } = error.response;
+        const { status } = error?.response;
 
         if (status === 401) {
+          toast.error(error?.response?.data?.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce
+          });
           dispatch(clearJudge());
+
           if (judge?.token) {
             dispatch(clearJudge());
 
