@@ -3,7 +3,7 @@ import styles from "./QuestionsList.module.css";
 import QuestionsList from "../../../components/Questions/QuestionsList";
 import NextButton from "../../../components/buttons/next-button/NextButton";
 import { useAppSelector } from "../../../redux/store";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams,useHistory } from "react-router-dom";
 import { useHttpRequests } from "../../../api/api";
 import { io } from "socket.io-client";
 import { BASE_URL } from "../../../utils/constant";
@@ -129,6 +129,24 @@ const QuestionsListPage = () => {
   
     setLoading(false);
   };
+
+  useEffect(() => {
+    // Push the current state onto the history stack
+    navigate(window.location.pathname);
+
+    const handlePopState = (event) => {
+      // Push the state back to prevent going back
+      navigate(window.location.pathname);
+    };
+
+    // Add event listener for popstate
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      // Cleanup the event listener
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [navigate]);
   
   return (
     <div className={styles.section}>
