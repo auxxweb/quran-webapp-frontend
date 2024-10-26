@@ -49,7 +49,8 @@ const Question = () => {
               </div>
               <div className={styles.question_div}>
                 <UserQuestions
-                  titile={`Question ${questionData?.questionNumber}`}
+                  // titile={`Question ${questionData?.questionNumber}`}
+                  titile={`Question`}
                   border={"#C19D5C"}
                   descrption={questionData?.question?.question}
                 />
