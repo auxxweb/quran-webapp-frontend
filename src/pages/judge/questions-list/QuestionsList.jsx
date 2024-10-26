@@ -49,16 +49,22 @@ const QuestionsListPage = () => {
 
   const fetchQuestionAndAnswer = async () => {
     const data = await get(`/judge/users/questions/${id}`);
-    
-
-    setQuestionData(data?.data);
-    findNextUnansweredQuestion(data?.data?.questions);
+    if (data?.success) {
+      setQuestionData(data?.data);
+      findNextUnansweredQuestion(data?.data?.questions);
+    } else {
+      navigate("/judge");
+    }
   };
 
   const findNextUnansweredQuestion = (questions) => {
     const currentQuestionIndexFind = questions?.findIndex(
       (que) => que?._id === questionId
     );
+    if (currentQuestionIndexFind === -1) {
+      navigate("/judge");
+      return;
+    }
     setCurrentQuestionIndex(currentQuestionIndexFind);
     setCurrentQuestion(questions[currentQuestionIndexFind]);
   };

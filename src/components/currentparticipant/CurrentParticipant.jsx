@@ -16,9 +16,13 @@ const CurrentParticipant = () => {
   const { post, get } = useHttpRequests()
   const { id } = useParams()
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       const data = await get('/judge/users/' + id)
-      setUserData(data.participant)
+      if (data?.success) {
+        setUserData(data?.participant)
+      } else {
+        navigate("/judge");
+      }
     })()
   }, [id])
   useEffect(() => {

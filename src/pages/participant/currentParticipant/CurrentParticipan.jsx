@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styles from "./currentParticipant.module.css";
-import {  useParams } from "react-router-dom";
+import {  useParams,useNavigate} from "react-router-dom";
 
 import { getParticipantDetailsHandler } from "../../../api/participantApi.";
 import Loading from "../../../components/loading/Loading";
 const CurrentParticipant = ({zoneDetails}) => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate()
   const { id } = useParams();
 
   useEffect(() => {
@@ -15,10 +15,15 @@ const CurrentParticipant = ({zoneDetails}) => {
       try {
         setLoading(true);
       const data = await getParticipantDetailsHandler(id);
-      setUserData(data.participant);
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
+      if (data?.success) {
+        setUserData(data.participant);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
+      } else {
+        navigate("/participant");
+      }
+      
     } catch (error) {
       setLoading(false);
       console.log(`Error occured in getParticipantDetailsHandler:${error}`);

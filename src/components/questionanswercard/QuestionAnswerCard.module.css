@@ -8,5 +8,5 @@
 }
 
 .descrption{
-    @apply text-center text-xl text-[25px]  leading-8 my-2
+    @apply  text-xl text-[25px]  leading-8 my-2
 }
