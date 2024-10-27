@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Default font for English and unspecified languages */
+.english-text {
+  font-family: 'Montserrat';
+}
+
+/* Arabic text */
+.arabic-text {
+  font-family: 'Tajawal';
+}
+
+/* Malayalam text */
+.malayalam-text {
+  font-family: 'Anek';
+}
