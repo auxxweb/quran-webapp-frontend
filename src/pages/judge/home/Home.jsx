@@ -41,14 +41,11 @@ const Home = () => {
   }
 
   useEffect(() => {
-    console.log('hello how are o', BASE_URL)
 
     socket = io(BASE_URL)
     socket.emit('join', judge?.zoneId)
 
     socket.on('proceed-question', ({ success, resultId, questionId }) => {
-      console.log(resultId, 'resultId')
-      console.log(questionId, 'questionId')
       if (success && resultId && questionId) {
         navigate('/judge/question-answer/' + resultId + '/' + questionId)
       }

@@ -8,6 +8,7 @@ import { useAppSelector } from "../../../redux/store";
 import { useHttpRequests } from "../../../api/api";
 import { useNavigate, useParams } from "react-router-dom";
 import { Bounce, toast } from "react-toastify";
+import { getTextDirection } from "../../../utils/constant";
 
 function QuestionAnswerPage() {
   const { judge } = useAppSelector((state) => state.judge);
@@ -24,7 +25,6 @@ function QuestionAnswerPage() {
 
   const navigate = useNavigate();
 
-
   useEffect(() => {
     fetchQuestionAndAnswer();
   }, []);
@@ -32,14 +32,22 @@ function QuestionAnswerPage() {
   const fetchQuestionAndAnswer = async () => {
     const data = await get(`/judge/users/questions/${id}`);
 
-    setQuestionData(data?.data);
-    findNextUnansweredQuestion(data?.data?.questions);
+    if (data?.success) {
+      setQuestionData(data?.data);
+      findNextUnansweredQuestion(data?.data?.questions);
+    } else {
+      navigate("/judge");
+    }
   };
 
   const findNextUnansweredQuestion = (questions) => {
     const currentQuestionIndexFind = questions?.findIndex(
       (que) => que?._id === questionId
     );
+    if (currentQuestionIndexFind === -1) {
+      navigate("/judge");
+      return;
+    }
     setCurrentQuestionIndex(currentQuestionIndexFind);
     setLatestCurrentQuestionIndex(currentQuestionIndexFind);
     setCurrentQuestion(questions[currentQuestionIndexFind]);
@@ -74,7 +82,6 @@ function QuestionAnswerPage() {
           transition: Bounce,
         });
       } else {
-
         const data = await post("/judge/users/submit-answers", {
           answer_id: judgeAnswer?._id,
           result_id: id,
@@ -104,8 +111,28 @@ function QuestionAnswerPage() {
   };
 
   const handleChange = (value, field) => {
-    setUpdateData((prev) => ({ ...prev, [field]: value }));
+    if (field == "mark" && value <= 100) {
+      setUpdateData((prev) => ({ ...prev, [field]: value }));
+    } else if (field == "answer") {
+      setUpdateData((prev) => ({ ...prev, [field]: value }));
+    } else {
+      toast.warning("Maximun score 100", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
   };
+  function autoResize(textarea) {
+    textarea.style.height = "auto"; // Reset height
+    textarea.style.height = textarea?.scrollHeight + "px"; // Set new height based on content
+  }
 
   return (
     <div className={styles.section}>
@@ -127,10 +154,14 @@ function QuestionAnswerPage() {
             <h2 className={styles.WelcomeText}>
               <img
                 className={styles.profileImage}
-                src={questionData?.participant_image}
+                src={
+                  questionData?.participant_image ?? "/images/profileImage.jpg"
+                }
                 alt="location-img"
               />
-              <span className={styles.nameText}>{questionData?.participant_name}</span>
+              <span className={styles.nameText}>
+                {questionData?.participant_name}
+              </span>
             </h2>
           </div>
         </div>
@@ -167,8 +198,22 @@ function QuestionAnswerPage() {
                     ? judgeAnswer?.answer
                     : updateData?.answer
                 }
-                onChange={(e) => handleChange(e.target.value, "answer")}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  handleChange(value, "answer")
+                  // Check if the input consists mostly of Arabic characters or spaces
+                  const isMostlyArabic = /^[\u0600-\u06FF\s]+$/.test(value);
+
+                  // Set input direction based on the content
+                  e.target.dir = isMostlyArabic ? "rtl" : "ltr";
+
+                  // Resize the textarea (if you're using the autoResize function)
+                  autoResize(e.target);
+                }}
                 className={styles.main_section}
+                dir={getTextDirection(judgeAnswer?.isCompleted
+                  ? judgeAnswer?.answer
+                  : updateData?.answer)}
                 placeholder="Participant’s Answer"
               />
             )}

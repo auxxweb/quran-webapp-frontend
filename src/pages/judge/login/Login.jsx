@@ -34,7 +34,7 @@ function Login() {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: value.trim(),
     }));
 
     loginValiDate({ ...formData, [name]: value }, setFormError, formError);
@@ -140,7 +140,6 @@ function Login() {
                       name="remember"
                       onChange={() => {
                         setRemember(!remember);
-                        console.log(remember);
                       }}
                     />
                   </div>

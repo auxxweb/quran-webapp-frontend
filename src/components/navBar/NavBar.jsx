@@ -8,7 +8,6 @@ const NavBar = () => {
   const navigate = useNavigate();
   const { judge } = useAppSelector((state) => state.judge);
   const dispatch = useAppDispatch();
-  console.log(judge, "judge");
   const handleLogout = async () => {
     dispatch(clearJudge());
     navigate("/judge/login");

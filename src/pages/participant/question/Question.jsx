@@ -4,12 +4,13 @@ import ParticipantNavBar from "../../../components/participant/participant-navBa
 import CircularTimer from "../../../components/timer/Timer";
 import UserQuestions from "../../../components/user-questions-show/UserQuestionsShow";
 import { getQuestionDetailsHandler } from "../../../api/participantApi.";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import Loading from "../../../components/loading/Loading";
 
 const Question = () => {
   const [questionData, setQuestionData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
   const { resultId, questionId } = useParams();
 
@@ -18,10 +19,14 @@ const Question = () => {
       try {
         setLoading(true);
         const data = await getQuestionDetailsHandler(resultId, questionId);
-        setQuestionData(data?.result);
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
+        if (data?.success) {
+          setQuestionData(data?.result);
+          setTimeout(() => {
+            setLoading(false);
+          }, 2000);
+        } else {
+          navigate("/participant");
+        }
       } catch (error) {
         setLoading(false);
         console.log(`Error occured in getQuestionDetailsHandler:${error}`);
@@ -36,23 +41,21 @@ const Question = () => {
         <Loading />
       ) : (
         <div className=" w-full max-w-screen-2xl">
-
-
-        <ParticipantNavBar data={questionData}>
-          <div className="h-full space-y-10">
-            <h1 className={styles.award_text}>ASLAM HOLY QUR’AN AWARD</h1>
-            <div className={styles.main_div}>
-              <CircularTimer />
+          <ParticipantNavBar data={questionData}>
+            <div className="h-full space-y-10">
+              <h1 className={styles.award_text}>ASLAM HOLY QUR’AN AWARD</h1>
+              <div className={styles.main_div}>
+                <CircularTimer />
+              </div>
+              <div className={styles.question_div}>
+                <UserQuestions
+                  titile={`Question ${questionData?.questionNumber}`}
+                  border={"#C19D5C"}
+                  descrption={questionData?.question?.question}
+                />
+              </div>
             </div>
-            <div className={styles.question_div}>
-              <UserQuestions
-                titile={`Question ${questionData?.questionNumber}`}
-                border={"#C19D5C"}
-                descrption={questionData?.question?.question}
-              />
-            </div>
-          </div>
-        </ParticipantNavBar>
+          </ParticipantNavBar>
         </div>
       )}
     </div>

@@ -3,11 +3,13 @@ import NavBar from "../navBar/NavBar";
 
 const Layout = ({ children }) => {
   return (
-    <div>
-      <div className="top-0 sticky z-50">
+    <div className="flex flex-col h-screen">
+      <div className="w-full fixed top-0 left-0 z-10">
         <NavBar />
       </div>
-      {children}
+      <div className="flex flex-1  pt-20">
+        <main className={`flex-1   `}>{children}</main>
+      </div>
     </div>
   );
 };

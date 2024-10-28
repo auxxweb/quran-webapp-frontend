@@ -1,6 +1,8 @@
-.section {
+
+  .section {
     background-image: url("/public/images/backgroundimage.png");
-    @apply bg-cover bg-center ;
+    @apply bg-repeat-y bg-center min-h-full pt-3 w-full;
+    background-size: 100% auto; /* Ensure horizontal cover and vertical repeat */
   }
   
   .container {
@@ -33,6 +35,6 @@
     @apply h-5 md:h-10;
   }
   .currentparticipant{
-    @apply flex justify-center 
+    @apply flex justify-center pb-5 
   }
   

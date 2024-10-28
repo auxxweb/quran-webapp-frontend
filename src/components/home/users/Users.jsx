@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import styles from "./users.module.css";
 import SearchInput from "../../search-input/SearchInput";
 import UserCard from "../user-card/UserCard";
-import {useHttpRequests } from "../../../api/api";
+import { useHttpRequests } from "../../../api/api";
 
 const Users = () => {
   const [userData, setUserData] = useState([]);
-  const [pageCount,setPageCount]=useState(1)
+  const [pageCount, setPageCount] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pagesToShow, setPagesToShow] = useState([]); 
-  const [search, setSearch] = useState([]); 
-  const { get} = useHttpRequests();
+  const [pagesToShow, setPagesToShow] = useState([]);
+  const [search, setSearch] = useState([]);
+  const { get } = useHttpRequests();
   const handleSearchInputChange = (value) => {
     fetchUser(value);
   };
@@ -20,15 +20,14 @@ const Users = () => {
   }, [currentPage]);
 
   const fetchUser = async (search) => {
-    setSearch(search)
+    setSearch(search);
     const data = await get(
       `/judge/users?currentPage=${currentPage}&&search=${search}`
     );
     setUserData(data?.participants);
-    setPageCount(data?.totalPages)
+    setPageCount(data?.totalPages);
     updatePagination(currentPage, data?.totalPages);
   };
-
 
   const updatePagination = (current, total) => {
     const maxPagesToShow = 5;
@@ -49,7 +48,10 @@ const Users = () => {
         endPage = current + Math.floor(maxPagesToShow / 2);
       }
     }
-    const newPagesToShow = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+    const newPagesToShow = Array.from(
+      { length: endPage - startPage + 1 },
+      (_, i) => startPage + i
+    );
     setPagesToShow(newPagesToShow);
   };
 
@@ -58,7 +60,6 @@ const Users = () => {
       setCurrentPage(page);
     }
   };
-
 
   return (
     <>
@@ -73,7 +74,7 @@ const Users = () => {
           ))}
         </div>
       </div>
-      <div className="flex justify-end gap-2 items-center mt-5">
+      <div className="flex justify-end gap-2 items-center py-5">
         <div
           onClick={() => handlePageChange(currentPage - 1)}
           className={`bg-secondary p-1 px-2 flex items-center cursor-pointer ${
@@ -87,7 +88,9 @@ const Users = () => {
           <h1
             key={page}
             onClick={() => handlePageChange(page)}
-            className={`cursor-pointer ${currentPage === page ? "font-bold text-xl" : ""}`}
+            className={`cursor-pointer ${
+              currentPage === page ? "font-bold text-xl" : ""
+            }`}
           >
             {page}
           </h1>
@@ -102,7 +105,6 @@ const Users = () => {
           <img src="/images/rightIcon.png" className="h-5" alt="" />
         </div>
       </div>
-
     </>
   );
 };
