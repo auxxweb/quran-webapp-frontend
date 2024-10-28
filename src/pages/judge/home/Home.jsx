@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import styles from './home.module.css'
 import Users from '../../../components/home/users/Users'
-import Loading from '../../../components/loading/Loading'
 import { useAppSelector } from '../../../redux/store'
 // import { BASE_URL } from "../../utils/constant";
 import { io } from 'socket.io-client'
@@ -20,10 +19,8 @@ const Home = () => {
   }, [])
 
   const featchResultDetails = async () => {
-    console.log(judge?.zoneId, 'zoneID')
 
     const data = await get(`/judge/users/questions/zone/${judge?.zoneId}`)
-    console.log(data, 'data-------')
     if (data && data?.data?.length > 0 ) {
       if(data?.data[0]?.answers?.length > 0){
         navigate(
